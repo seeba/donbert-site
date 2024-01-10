@@ -21,6 +21,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Product/Infrastructure/Entity'
                 prefix: 'App\Products\Intfrastructure\Entity'
                 alias: App\Product
+            App\Product\Attribute:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Product/Infrastructure/Entity/Attribute'
+                prefix: 'App\Products\Intfrastructure\Entity\Attribute'
+                alias: App\Product\Attribute
 
 when@test:
     doctrine:
