@@ -14,5 +14,6 @@ final readonly class CreateCategoryCommand implements CommandInterface
         public string $parentId
     )
     {
+        
     }
 }
