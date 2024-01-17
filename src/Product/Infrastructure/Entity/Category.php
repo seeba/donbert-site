@@ -27,7 +27,7 @@ class Category
     private $parent;
 
     #[ORM\OneToMany(targetEntity:"App\Product\Infrastructure\Entity\Category", mappedBy:"parent")]
-    private $children;
+    private Collection $children;
 
     #[ORM\ManyToMany(targetEntity:"App\Product\Infrastructure\Entity\Category", mappedBy:"categories")]
     private $products;
@@ -42,10 +42,32 @@ class Category
         $this->children = new ArrayCollection();
     }
 
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getParent(): Category
+    {
+        return $this->parent;
+    }
+
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+
     public function getProducts(): Collection
     {
         return $this->products;
     }
+
 
     public function addProduct(Product $product): self
     {
