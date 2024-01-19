@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Domain;
+namespace App\Shared\Domain\Model;
 
-use App\Shared\Domain\Exception\InvalidId;
+use App\Shared\Domain\Exception\InvalidIdException;
 
 readonly class Id
 {
@@ -29,7 +29,7 @@ readonly class Id
     private function guard(): void
     {
         if (! preg_match(self::ID_FORMAT, $this->id)) {
-            throw new InvalidId();
+            throw new InvalidIdException();
         }
     }
 }
