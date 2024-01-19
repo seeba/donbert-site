@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\Utils\Repository;
 
-use App\Product\Domain\Exception\CategoryNotFound;
 use App\Product\Domain\Exception\CategoryNotFoundException;
 use App\Product\Domain\Model\Category;
 use App\Product\Domain\Model\CategoryId;
@@ -33,5 +32,12 @@ final class CategoryRepository implements CategoryDomainRepositoryInterface
         $entity = $this->repository->find($id->toString());
 
         return $entity === null ? throw new CategoryNotFoundException() : $this->transformer->toDomain($entity);
+    }
+
+    public function findAll() : array
+    {
+        $categories = $this->repository->findAll();
+
+        return $categories;
     }
 }
