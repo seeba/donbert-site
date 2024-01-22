@@ -56,7 +56,7 @@ class CategoryType extends AbstractType
     }
     private function updateParentCategoryChoices($form, $categoryDTO)
     {
-        $form->add('parentCategory', ChoiceType::class, [
+        $form->add('parentId', ChoiceType::class, [
             'choices' => $categoryDTO ? $this->categoryManager->getParentCategoryChoices() : [],
             'required' => false,
             'placeholder' => 'Wybierz kategorię nadrzędną',
