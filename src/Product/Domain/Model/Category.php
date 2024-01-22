@@ -47,4 +47,9 @@ final class Category
     {
         return $this->parentId;
     }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
 }

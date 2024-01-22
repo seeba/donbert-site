@@ -57,6 +57,13 @@ class Category
         return $this->parent;
     }
 
+    public function setParent(Category $category): self
+    {
+        $this->parent = $category;
+
+        return $this;
+    }
+
     public function getChildren(): Collection
     {
         return $this->children;
