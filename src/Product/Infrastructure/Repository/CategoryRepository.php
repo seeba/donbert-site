@@ -6,7 +6,6 @@ namespace App\Product\Infrastructure\Repository;
 
 use App\Product\Infrastructure\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 final class CategoryRepository extends ServiceEntityRepository
