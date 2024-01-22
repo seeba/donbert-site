@@ -30,8 +30,12 @@ final class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $command = new CreateCategoryCommand($idGenerator->generate()->toString(), $categoryDTO->name, $categoryDTO->parentId);
-            $messageBus->dispatch($command);
+            $command = new CreateCategoryCommand(
+                $idGenerator->generate()->toString(), 
+                $categoryDTO->name, 
+                $categoryDTO->parentId);
+            
+                $messageBus->dispatch($command);
 
             return $this->redirectToRoute('');
         }
