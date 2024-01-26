@@ -9,6 +9,7 @@ use App\Product\Domain\Model\Category;
 use App\Product\Domain\Service\CategoryManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -31,7 +32,8 @@ class CategoryType extends AbstractType
                 'choices' => $this->categoryManager->getParentCategoryChoices(),
                 'required' => false,
                 'placeholder' => 'Wybierz kategorię nadrzędną'
-            ]);
+            ])
+            ->add('save', SubmitType::class);
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $form = $event->getForm();
             $categoryDTO = $event->getData();

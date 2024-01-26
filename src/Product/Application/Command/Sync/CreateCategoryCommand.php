@@ -11,7 +11,7 @@ final readonly class CreateCategoryCommand implements CommandInterface
     public function __construct(
         public string $id,
         public string $name,
-        public string $parentId
+        public ?string $parentId = null
     )
     {
         

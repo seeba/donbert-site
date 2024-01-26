@@ -21,7 +21,14 @@ final class CategoryTransformer
     {
         $categoryEntity = $this->categoryRepository->find($category->getId()->toString());
         if ($categoryEntity === null) {
-
+            $categoryEntity = new CategoryEntity(
+                $category->getId()->toString(),
+                $category->getName()
+            );
+            $parentEntity = $this->categoryRepository->find($category->getParentId()->toString());
+            if ($parentEntity != null) {
+                $categoryEntity->setParent($parentEntity);
+            }
         }
 
         return $categoryEntity;

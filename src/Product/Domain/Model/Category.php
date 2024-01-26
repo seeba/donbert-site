@@ -10,20 +10,19 @@ final class Category
     private function __construct(
         private CategoryId $id,
         private $name,
-        private ?CategoryId $parentId
+        private ?CategoryId $parentId = null
     )
     {
-        $this->parentId = null;
+        
     }
 
     public static function create(
         CategoryId $id,
         string $name,
-        ?CategoryId $parentId
+        ?CategoryId $parentId = null
     ): self {
 
         $category = new self($id, $name, $parentId);
-
         return $category;
     }
 
