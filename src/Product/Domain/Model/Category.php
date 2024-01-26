@@ -42,7 +42,7 @@ final class Category
         return $this->id;
     }
 
-    public function getParentId(): CategoryId
+    public function getParentId(): ?CategoryId
     {
         return $this->parentId;
     }

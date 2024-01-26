@@ -26,7 +26,7 @@ class CreateCategoryCommandHandler implements CommandHandlerInterface
         $category = Category::create(
             new CategoryId($command->id),
             $command->name, 
-            new CategoryId($command->parentId)   
+            is_null($command->parentId) ? null : new CategoryId($command->parentId)   
         );   
         
         $this->categoryRepository->save($category);

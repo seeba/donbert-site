@@ -25,10 +25,12 @@ final class CategoryTransformer
                 $category->getId()->toString(),
                 $category->getName()
             );
-            $parentEntity = $this->categoryRepository->find($category->getParentId()->toString());
-            if ($parentEntity != null) {
-                $categoryEntity->setParent($parentEntity);
-            }
+        } 
+          
+        $parentEntity = ($category->getParentId() instanceof CategoryId) ?? $this->categoryRepository->find($category->getParentId()->toString());
+        
+        if ($parentEntity != null) {
+            $categoryEntity->setParent($parentEntity);
         }
 
         return $categoryEntity;
