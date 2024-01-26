@@ -52,7 +52,7 @@ class Category
         return $this->name;
     }
 
-    public function getParent(): Category
+    public function getParent(): ?Category
     {
         return $this->parent;
     }
