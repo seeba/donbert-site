@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Product\Application\Form;
 
 use App\Product\Application\DTO\CategoryDTO;
-use App\Product\Domain\Model\Category;
 use App\Product\Domain\Service\CategoryManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
