@@ -4,35 +4,40 @@ declare(strict_types=1);
 
 namespace App\Product\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 final class Category
 {
     
     private function __construct(
         private CategoryId $id,
         private $name,
-        private ?CategoryId $parentId = null
+        private ?CategoryId $parentId = null,
+        private Collection $products = new ArrayCollection()
     )
-    {
-        
+    {       
     }
 
     public static function create(
         CategoryId $id,
         string $name,
-        ?CategoryId $parentId = null
+        ?CategoryId $parentId = null,
+        Collection $products = new ArrayCollection()
     ): self {
 
-        $category = new self($id, $name, $parentId);
+        $category = new self($id, $name, $parentId, $products);
         return $category;
     }
 
     public static function restore(
         CategoryId $id,
         string $name,
-        CategoryId $parentId
+        CategoryId $parentId,
+        Collection $products = new ArrayCollection()
     ): self {
 
-        $category = new self($id, $name, $parentId);
+        $category = new self($id, $name, $parentId, $products);
 
         return $category;
     }
@@ -50,5 +55,24 @@ final class Category
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->addCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->removeElement($product)) {
+            $product->removeCategory($this);
+        }
+
+        return $this;
     }
 }
