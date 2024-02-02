@@ -39,6 +39,16 @@ class Product
         $this->variants = new ArrayCollection();
     }
 
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+    
     public function getVariants():Collection
     {
         return $this->variants;
@@ -76,6 +86,19 @@ class Product
         if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
             $category->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function addCategories(Collection $categories): self
+    {
+
+        /**
+         * @var Category $category
+         */
+        foreach ($categories as $category) {
+            $this->addCategory($category);
         }
 
         return $this;
