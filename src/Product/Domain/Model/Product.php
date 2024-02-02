@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Product\Domain\Model;
 
+use App\Shared\Domain\Aggregate\AggregateRoot;
 use Doctrine\Common\Collections\Collection;
 
-final class Product
+final class Product extends AggregateRoot
 {
     
     private function __construct(
