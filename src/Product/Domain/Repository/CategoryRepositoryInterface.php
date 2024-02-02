@@ -9,7 +9,7 @@ use App\Product\Domain\Model\CategoryId;
 
 interface CategoryRepositoryInterface
 {
-    public function get(CategoryId $id);
+    public function get(CategoryId $id): Category;
 
     public function save(Category $category): void;
 
