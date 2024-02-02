@@ -26,8 +26,10 @@ final class CategoryRepository implements CategoryDomainRepositoryInterface
             $this->transformer->fromDomain($category)
         );
     }
-
-    public function get(CategoryId $id)
+    /**
+     * @throws ProductNotFoundException
+     */
+    public function get(CategoryId $id): Category
     {
         $entity = $this->repository->find($id->toString());
 
