@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Product\Application\Form;
+namespace App\Product\Infrastructure\UI\Web\Form;
 
 use App\Product\Application\DTO\CategoryDTO;
 use App\Product\Domain\Service\CategoryManagerInterface;

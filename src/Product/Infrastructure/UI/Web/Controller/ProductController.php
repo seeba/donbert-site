@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Product\Infrastructure\Controller;
+namespace App\Product\Infrastructure\UI\Web\Controller;
 
 use App\Product\Application\Command\Sync\CreateProductCommand;
 use App\Product\Application\DTO\ProductDTO;
-use App\Product\Application\Form\ProductType;
+use App\Product\Infrastructure\UI\Web\Form\ProductType;
 use App\Shared\Application\Service\IdGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
