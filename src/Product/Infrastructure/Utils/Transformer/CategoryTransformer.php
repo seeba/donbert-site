@@ -38,10 +38,11 @@ final class CategoryTransformer
 
     public function toDomain(CategoryEntity $categoryEntity) : Category
     {
+    
         return Category::restore(
             new CategoryId($categoryEntity->getId()),
             $categoryEntity->getName(),
-            new CategoryId($categoryEntity->getParent()->getId())
+            is_null($categoryEntity->getParent()) ? null :  new CategoryId($categoryEntity->getParent()->getId())
         );
     }
 }
