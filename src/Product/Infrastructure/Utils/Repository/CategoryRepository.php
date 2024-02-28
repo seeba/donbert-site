@@ -10,6 +10,7 @@ use App\Product\Domain\Model\CategoryId;
 use App\Product\Domain\Repository\CategoryRepositoryInterface as CategoryDomainRepositoryInterface;
 use App\Product\Infrastructure\Repository\CategoryRepository as DoctrineCategoryRepository;
 use App\Product\Infrastructure\Utils\Transformer\CategoryTransformer;
+use Doctrine\Common\Collections\ArrayCollection;
 
 final class CategoryRepository implements CategoryDomainRepositoryInterface
 {
@@ -40,6 +41,21 @@ final class CategoryRepository implements CategoryDomainRepositoryInterface
     {
         $categories = $this->repository->findAll();
 
-        return $categories;
+       return $categories;
+    }
+
+    public function findByIds(array $ids) 
+    {
+        
+        $categories = $this->repository->findByIds($ids);
+       
+        $domainCategories = new ArrayCollection();
+
+        foreach ($categories as $category) {
+            
+            $domainCategories->add($this->transformer->toDomain($category));
+        }
+        dd($domainCategories);
+        return $domainCategories;
     }
 }
