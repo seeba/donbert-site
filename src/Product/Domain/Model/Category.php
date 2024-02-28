@@ -33,7 +33,7 @@ final class Category
     public static function restore(
         CategoryId $id,
         string $name,
-        CategoryId $parentId,
+        ?CategoryId $parentId = null,
         Collection $products = new ArrayCollection()
     ): self {
 
