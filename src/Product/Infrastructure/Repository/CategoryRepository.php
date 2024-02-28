@@ -19,4 +19,13 @@ final class CategoryRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($category);
         $this->getEntityManager()->flush();
     }
+
+    public function findByIds(array $ids) 
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->where('c.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery();
+        return $qb->getResult();
+    }
 }
