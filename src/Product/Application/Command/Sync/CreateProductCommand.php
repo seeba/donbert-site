@@ -11,6 +11,7 @@ final readonly class CreateProductCommand implements CommandInterface
     public function __construct(
         public string $id,
         public string $name,
+        public array $categoriesIds
     )
     {
         

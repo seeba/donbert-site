@@ -6,6 +6,7 @@ namespace App\Product\Application\Command\Sync;
 
 use App\Product\Domain\Model\Product;
 use App\Product\Domain\Model\ProductId;
+use App\Product\Domain\Repository\CategoryRepositoryInterface;
 use App\Product\Domain\Repository\ProductRepositoryInterface;
 use App\Shared\Application\Command\Sync\CommandHandlerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -14,15 +15,19 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 class CreateProductCommandHandler implements CommandHandlerInterface
 {
     public function __construct(
-        private ProductRepositoryInterface $productRepository
+        private ProductRepositoryInterface $productRepository,
+        private CategoryRepositoryInterface $categoryRepository
     )
     {
     }
     
-    
     public function __invoke(CreateProductCommand $command)
     {
        
+       
+        $categories = $this->categoryRepository->findByIds($command->categoriesIds);
+        dd($categories);
+        
         $product = Product::create(
             new ProductId($command->id),
             $command->name,  
