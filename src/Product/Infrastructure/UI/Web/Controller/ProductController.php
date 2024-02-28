@@ -31,6 +31,7 @@ final class ProductController extends AbstractController
             $command = new CreateProductCommand(
                 $idGenerator->generate()->toString(), 
                 $productDTO->name, 
+                $productDTO->categoriesIds
                 );
             
                 $messageBus->dispatch($command);
