@@ -13,7 +13,7 @@ final class Product extends AggregateRoot
     private function __construct(
         private ProductId $id,
         private string $name,
-        private Collection $categories = null
+        private ?Collection $categories = null
     )
     {}
 

@@ -1,10 +1,10 @@
 shared:
     resource:
-        path: ../src/Shared/Infrastructure/Controller
-        namespace: App\Shared\Infrastructure\Controller
+        path: ../src/Shared/Infrastructure/UI/Web/Controller
+        namespace: App\Shared\Infrastructure\UI\Web\Controller
     type: attribute
 product:
     resource:
-        path: ../src/Product/Infrastructure/Controller
-        namespace: App\Product\Infrastructure\Controller
+        path: ../src/Product/Infrastructure/UI/Web/Controller
+        namespace: App\Product\Infrastructure\UI\Web\Controller
     type: attribute

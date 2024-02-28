@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class CategoryController extends AbstractController
+final class ProductController extends AbstractController
 {
     #[Route('admin/product/new', name:'admin-product-add', methods:['GET', 'POST'])]
     public function create(
