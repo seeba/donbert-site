@@ -26,10 +26,12 @@ final class CategoryController extends AbstractController
         ): Response
     {
         $categoryDTO = new CategoryDTO();
+        
         $form = $this->createForm(CategoryType::class, $categoryDTO);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $command = new CreateCategoryCommand(
                 $idGenerator->generate()->toString(), 
                 $categoryDTO->name, 

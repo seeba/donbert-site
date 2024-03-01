@@ -20,7 +20,7 @@ class CategoryManager implements CategoryManagerInterface
     $choices = [];
 
     foreach ($categories as $category) {
-        $choices[$category->getName()] = $category->getId();
+        $choices[$category->getName()] = $category->getId()->toString();
     }
 
     return $choices;

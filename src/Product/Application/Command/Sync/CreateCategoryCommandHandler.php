@@ -22,7 +22,7 @@ class CreateCategoryCommandHandler implements CommandHandlerInterface
     
     public function __invoke(CreateCategoryCommand $command)
     {
-       
+      // dd($command);
         $category = Category::create(
             new CategoryId($command->id),
             $command->name, 

@@ -25,9 +25,13 @@ final class CategoryTransformer
                 $category->getId()->toString(),
                 $category->getName()
             );
-        } 
-          
-        $parentEntity = ($category->getParentId() instanceof CategoryId) ?? $this->categoryRepository->find($category->getParentId()->toString());
+        }
+        $parentId = $category->getParentId();
+        $parentEntity = null;
+        
+        if ($parentId instanceof CategoryId) {
+            $parentEntity = $this->categoryRepository->find($parentId->toString());
+        }
         
         if ($parentEntity != null) {
             $categoryEntity->setParent($parentEntity);
@@ -38,7 +42,7 @@ final class CategoryTransformer
 
     public function toDomain(CategoryEntity $categoryEntity) : Category
     {
-    
+
         return Category::restore(
             new CategoryId($categoryEntity->getId()),
             $categoryEntity->getName(),
