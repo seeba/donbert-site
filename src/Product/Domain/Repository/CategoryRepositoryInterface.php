@@ -14,7 +14,7 @@ interface CategoryRepositoryInterface
 
     public function save(Category $category): void;
 
-    public function findAll(): array;
+    public function findAll(): ArrayCollection;
 
-    public function findByIds(array $ids);
+    public function findByIds(array $ids): ArrayCollection;
 }

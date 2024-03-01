@@ -37,16 +37,22 @@ final class CategoryRepository implements CategoryDomainRepositoryInterface
         return $entity === null ? throw new CategoryNotFoundException() : $this->transformer->toDomain($entity);
     }
 
-    public function findAll() : array
+    public function findAll() : ArrayCollection
     {
         $categories = $this->repository->findAll();
 
-       return $categories;
+        $domainCategories = new ArrayCollection();
+
+        foreach ($categories as $category) {
+            
+            $domainCategories->add($this->transformer->toDomain($category));
+        }
+      
+        return $domainCategories;
     }
 
-    public function findByIds(array $ids) 
+    public function findByIds(array $ids): ArrayCollection
     {
-        
         $categories = $this->repository->findByIds($ids);
        
         $domainCategories = new ArrayCollection();
@@ -55,7 +61,7 @@ final class CategoryRepository implements CategoryDomainRepositoryInterface
             
             $domainCategories->add($this->transformer->toDomain($category));
         }
-        dd($domainCategories);
+      
         return $domainCategories;
     }
 }
