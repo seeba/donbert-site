@@ -57,13 +57,13 @@
 				<div class="row d-flex justify-content-between align-items-center">
 					<div class="dlab-topbar-left">
 						<ul>
-							<li><a href="{{ path('app_site_about_us')}}">O nas</a></li>
+							<li><a href="">O nas</a></li>
 							<li><a href="privacy-policy.html">Polityka prywatności</a></li>
 							<li><a href="">Panel administracyjny</a></li>
 						</ul>
 					</div>
 					<div class="dlab-topbar-right">
-						<a href="{{ path('app_site_contact')}}" class="site-button radius-no btnhover13">UZYSKAJ WYCENĘ</a>
+						<a href="" class="site-button radius-no btnhover13">UZYSKAJ WYCENĘ</a>
 						<a href="contact-1.html" class="site-button radius-no btnhover13">STREFA KLIENTA</a>						
 					</div>
 				</div>
@@ -102,7 +102,7 @@
 							<a href="index.html"><img src="{{('images/logo.png')}}" alt=""></a>
 						</div>
                         <ul class="nav navbar-nav">	
-							<li class="active has-mega-menu"> <a href="{{ path('app_site_home')}}">Strona główna</a>
+							<li class="active has-mega-menu"> <a href="">Strona główna</a>
 								
 							</li>
 							<li>
@@ -177,11 +177,11 @@
 								</ul>
 							</li>
 							
-							<li class="has-mega-menu"> <a href="{{ path('app_site_about_us')}}">O firmie</a>
+							<li class="has-mega-menu"> <a href="">O firmie</a>
 								
 							</li>
 							<li>
-								<a href="{{ path('app_site_contact')}}">Kontakt</a>
+								<a href="">Kontakt</a>
 							</li>
 						</ul>		
 						<div class="dlab-social-icon">
@@ -210,8 +210,7 @@
 
     <!-- Footer -->
     {% block footer %}
-        {{ render(controller(
-        'App\\Site\\Application\\Controller\\Http\\FooterController')) }}
+        {{ include('site/footer.html.twig') }}
     {% endblock %}
     
     <!-- Footer END -->

@@ -3,8 +3,13 @@ shared:
         path: ../src/Shared/Infrastructure/UI/Web/Controller
         namespace: App\Shared\Infrastructure\UI\Web\Controller
     type: attribute
+admin_product:
+    resource:
+        path: ../src/Product/Infrastructure/UI/Web/Controller/Admin
+        namespace: App\Product\Infrastructure\UI\Web\Controller\Admin
+    type: attribute
 product:
     resource:
-        path: ../src/Product/Infrastructure/UI/Web/Controller
-        namespace: App\Product\Infrastructure\UI\Web\Controller
+        path: ../src/Product/Infrastructure/UI/Web/Controller/Www
+        namespace: App\Product\Infrastructure\UI\Web\Controller\Www
     type: attribute
