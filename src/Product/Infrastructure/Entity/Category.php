@@ -9,8 +9,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-use function PHPSTORM_META\map;
-
 #[ORM\Entity()]
 #[ORM\Table(name:"categories")]
 class Category
