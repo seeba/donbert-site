@@ -8,7 +8,7 @@ use App\Newsletter\Infrastructure\Entity\NewsletterConsent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-final class NewsletterConsentRepositiory extends ServiceEntityRepository
+final class NewsletterConsentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
