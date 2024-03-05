@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Newsletter\Domain\Model;
 
-use App\Product\Domain\Model\NewsletterConsentId;
+use App\Newsletter\Domain\Model\NewsletterConsentId;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\ValueObject\Email;
 use DateTime;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Product\Domain\Model;
+namespace App\Newsletter\Domain\Model;
 
 use App\Shared\Domain\Model\Id;
 

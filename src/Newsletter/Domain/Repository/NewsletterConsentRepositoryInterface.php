@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Newsletter\Domain\Repository;
 
 use App\Newsletter\Domain\Model\NewsletterConsent;
-use App\Product\Domain\Model\NewsletterConsentId;
+use App\Newsletter\Domain\Model\NewsletterConsentId;
 
 interface NewsletterConsentRepositoryInterface 
 {
