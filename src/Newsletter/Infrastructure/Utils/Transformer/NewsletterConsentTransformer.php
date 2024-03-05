@@ -18,14 +18,14 @@ final class NewsletterConsentTransformer {
         
     }
 
-    public function fromDomain(NewsletterConsent $newsletterConsent) 
+    public function fromDomain(NewsletterConsent $newsletterConsent): NewsletterConsentEntity
     {
 
     }
 
-    public function toDomain(NewsletterConsentEntity $newsletterConsentEntity) 
+    public function toDomain(NewsletterConsentEntity $newsletterConsentEntity): NewsletterConsent 
     {
-        
+
     }
 
 }
