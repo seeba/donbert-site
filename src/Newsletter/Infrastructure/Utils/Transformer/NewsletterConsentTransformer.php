@@ -6,13 +6,13 @@ namespace App\Newsletter\Infrastructure\Utils\Transformer;
 
 use App\Newsletter\Domain\Model\NewsletterConsent;
 use App\Newsletter\Infrastructure\Entity\NewsletterConsent as NewsletterConsentEntity;
-use App\Newsletter\Infrastructure\Repository\NewsletterConsentRepositiory;
+use App\Newsletter\Infrastructure\Repository\NewsletterConsentRepository;
 
 
 final class NewsletterConsentTransformer {
 
     public function __construct(
-        private NewsletterConsentRepositiory $newsletterConsentRepositiory
+        private NewsletterConsentRepository $newsletterConsentRepositiory
     )
     {
         
