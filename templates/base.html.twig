@@ -210,7 +210,7 @@
 
     <!-- Footer -->
     {% block footer %}
-        {{ include('site/footer.html.twig') }}
+       {{ footer_service.getFooterContent()|raw }}
     {% endblock %}
     
     <!-- Footer END -->

@@ -1,3 +1,9 @@
+
+site:
+    resource:
+        path: ../src/Site/Infrastructure/UI/Web/Controller
+        namespace: App\Site\Infrastructure\UI\Web\Controller
+    type: attribute
 shared:
     resource:
         path: ../src/Shared/Infrastructure/UI/Web/Controller
