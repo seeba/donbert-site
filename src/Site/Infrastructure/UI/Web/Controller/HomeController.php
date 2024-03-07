@@ -11,10 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/', name:'app_site_home')]
 class HomeController extends AbstractController
-{
+{ 
     public function __invoke(Request $request): Response
     {
-        return $this->render('site/index.html.twig', [
+        
+       return $this->render('site/index.html.twig', [
             'title' => 'Strona główna'
         ]);
     }

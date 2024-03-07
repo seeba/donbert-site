@@ -16,6 +16,11 @@ admin_product:
     type: attribute
 product:
     resource:
-        path: ../src/Product/Infrastructure/UI/Web/Controller/Www
-        namespace: App\Product\Infrastructure\UI\Web\Controller\Www
+        path: ../src/Product/Infrastructure/UI/Web/Controller
+        namespace: App\Product\Infrastructure\UI\Web\Controller
+    type: attribute
+newsletter:
+    resource:
+        path: ../src/Newsletter/Infrastructure/UI/Web/Controller
+        namespace: App\Newsletter\Infrastructure\UI\Web\Controller
     type: attribute
