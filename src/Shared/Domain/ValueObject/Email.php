@@ -13,7 +13,7 @@ class Email
      */
     private $email;
 
-    private function __construct(string $email)
+    public function __construct(string $email)
     {
         $this->ensureIsValidEmail($email);
         $this->email = $email;
