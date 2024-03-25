@@ -27,7 +27,13 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Product/Infrastructure/Entity/Attribute'
                 prefix: 'App\Product\Infrastructure\Entity\Attribute'
                 alias: App\Product\Attribute
-
+            App\Newsletter:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Newsletter/Infrastructure/Entity'
+                prefix: 'App\Newsletter\Infrastructure\Entity'
+                alias: App\Newsletter
+                
 when@test:
     doctrine:
         dbal:
