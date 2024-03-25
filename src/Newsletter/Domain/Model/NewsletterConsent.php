@@ -39,4 +39,19 @@ final class NewsletterConsent extends AggregateRoot
 
         return $newsletterConsent;
     }
+
+    public function getId(): NewsletterConsentId
+    {
+        return $this->id;
+    }
+
+    public function getEmail(): Email
+    {
+        return $this->email;
+    }
+
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
+    }
 }
