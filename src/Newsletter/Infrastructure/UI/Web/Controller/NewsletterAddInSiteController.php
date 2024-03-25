@@ -9,10 +9,10 @@ use App\Newsletter\Infrastructure\UI\Web\Form\NewsletterType;
 use App\Shared\Application\Service\IdGeneratorInterface;
 use App\Shared\Domain\ValueObject\Email;
 use DateTime;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -28,13 +28,13 @@ class NewsletterAddInSiteController extends AbstractController
     
     public function __invoke(Request $request) : JsonResponse 
     {
+        
         $form = $this->createForm(NewsletterType::class, null, [
             'action' => $this->generateUrl('app_newsletter_add_in_site')
         ]);
         $form->handleRequest($request);
-
+       
         if ($form->isValid()) {
-
             $data = $form->getData();
             try {
                 $command = new AddToNewsletterFromSiteCommand(
@@ -48,8 +48,15 @@ class NewsletterAddInSiteController extends AbstractController
                 $this->messageBus->dispatch($command);
 
 
-            } catch (Exception $exception){
-
+            } catch (HandlerFailedException $exception){
+            
+                if ($exception->getPrevious()) {
+                    $exception = $exception->getPrevious();
+                }
+    
+                $msg = $exception->getMessage();
+               
+                $status = 0;
             }
 
             return new JsonResponse([
