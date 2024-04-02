@@ -1,0 +1,53 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+
+     {{ form_row(form.name) }}
+     {{ form_row(form.categoriesIds) }}
+     {{ form_label(form.images) }}
+
+    <div class="collection-container">
+        <div 
+            class="collection-images"
+            data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
+            data-prototype='{{ form_widget(form.images.vars.prototype) }}'>  
+        </div>
+
+        {{ form_widget(form.images) }}
+    </div>
+
+    <button type="button" class="btn btn-primary add_item_link" data-collection-holder-class="collection-images">Dodaj zdjęcie</button>
+
+    {{ form_end(form) }}
+{% endblock %}
+{% block my_scripts %}
+
+<script>
+document
+  .querySelectorAll('.add_item_link')
+  .forEach(btn => {
+      btn.addEventListener("click", addFormToCollection)
+  });
+    function addFormToCollection(e) {
+        const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+        const item = document.createElement('div');
+        
+        
+
+        item.innerHTML = collectionHolder
+            .dataset
+            .prototype
+            .replace(
+            /__name__/g,
+            collectionHolder.dataset.index
+            );
+
+        collectionHolder.appendChild(item);
+
+        collectionHolder.dataset.index++;
+    };
+</script>
+
+{% endblock %}

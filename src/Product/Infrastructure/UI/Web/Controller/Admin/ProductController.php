@@ -26,7 +26,7 @@ final class ProductController extends AbstractController
         $productDTO = new ProductDTO();
         $form = $this->createForm(ProductType::class, $productDTO);
         $form->handleRequest($request);
-
+//dd($productDTO);
         if ($form->isSubmitted() && $form->isValid()) {
             $command = new CreateProductCommand(
                 $idGenerator->generate()->toString(), 
@@ -36,7 +36,7 @@ final class ProductController extends AbstractController
             
                 $messageBus->dispatch($command);
 
-            return $this->redirectToRoute('');
+            return $this->redirectToRoute('app_site_home');
         }
 
         return $this->render('product/product/create.html.twig', [

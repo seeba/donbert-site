@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Product\Domain\Model;
 
 use App\Shared\Domain\Aggregate\AggregateRoot;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 final class Product extends AggregateRoot
@@ -13,27 +14,27 @@ final class Product extends AggregateRoot
     private function __construct(
         private ProductId $id,
         private string $name,
-        private ?Collection $categories = null
+        private Collection $categories = new ArrayCollection()
     )
     {}
 
     public static function create(
         ProductId $id,
         string $name,
-        $categories = null
+    
     ): self {
 
-        $product = new self($id, $name, $categories);
+        $product = new self($id, $name);
         return $product;
     }
 
     public static function restore(
         ProductId $id,
         string $name,
-        $categories = null
+       
     ): self {
 
-        $product = new self($id, $name, $categories);
+        $product = new self($id, $name);
         return $product;
     }
 
@@ -59,9 +60,9 @@ final class Product extends AggregateRoot
 
     public function removeCategory(Category $category): self
     {
-        if ($this->categories->removeElement($category)) {
-            $category->removeProduct($this);
-        }
+        // if ($this->categories->removeElement($category)) {
+        //     $category->removeProduct($this);
+        // }
 
         return $this;
     }

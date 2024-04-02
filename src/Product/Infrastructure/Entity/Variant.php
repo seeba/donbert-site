@@ -31,6 +31,9 @@ class Variant
     #[ORM\InverseJoinColumn(name:"attributte_id", referencedColumnName:"id")]
     private $attributes;
 
+    #[ORM\OneToMany(targetEntity:"App\Product\Infrastructure\Entity\Image", mappedBy:"variant", cascade:["persist", "remove"])]
+    private $images;
+
     public function __construct(
         string $id,
         string $name,

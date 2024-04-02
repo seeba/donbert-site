@@ -5,37 +5,42 @@ declare(strict_types=1);
 namespace App\Product\Domain\Model;
 
 use App\Shared\Domain\Aggregate\AggregateRoot;
-use Doctrine\Common\Collections\Collection;
 
 final class Image extends AggregateRoot
 {
     
     private function __construct(
         private ImageId $id,
+        private string $originalName,
         private string $fileName,
-        private string $url
+        private string $mimeType,
+        private array $urls
     )
     {}
 
     public static function create(
         ImageId $id,
+        string $originalName,
         string $fileName,
-        string $url
+        string $mimeType,
+        array $urls
         
     ): self {
 
-        $image = new self($id, $fileName, $url);
+        $image = new self($id, $originalName, $fileName, $mimeType, $urls);
         return $image;
     }
 
     public static function restore(
         ImageId $id,
+        string $originalName,
         string $fileName,
-        string $url
+        string $mimeType,
+        array $urls
         
     ): self {
 
-        $image = new self($id, $fileName, $url);
+        $image = new self($id, $originalName, $fileName, $mimeType, $urls);
         return $image;
     }
 

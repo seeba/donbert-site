@@ -7,14 +7,16 @@ namespace App\Product\Infrastructure\UI\Web\Form;
 use App\Product\Application\DTO\ProductDTO;
 use App\Product\Domain\Service\CategoryManagerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductType extends AbstractType
+class ImageType extends AbstractType
 {
     public function __construct(
         private CategoryManagerInterface $categoryManager
@@ -26,38 +28,37 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control'
+            ->add('main', CheckboxType::class, [
+                'required' => false,
+                'row_attr' => [
+                    'class' => 'form-check'
                 ],
                 'label_attr' => [
-                    'class' => 'form-label'
+                    'class' => 'form-check-label'
                 ],
-                'label' => 'Nazwa produktu'
-             ])
-            ->add('categoriesIds', ChoiceType::class, [
-                'choices' => $this->categoryManager->getParentCategoryChoices(),
-                'required' => true,
-                'multiple' => true,
-                'expanded' => true,
-                'label' => 'Kategoria',
                 'attr' => [
-                    'class' => 'input-group',
-                   
-                ],
-                    
+                    'class' =>'form-check-input'
+                ]
             ])
-            ->add('save', SubmitType::class)
+            ->add('file', FileType::class, [
+                'row_attr' => [
+                    'class' => 'input-group'
+                ],
+                'label_attr' => [
+                    'class' => 'input-group-text'
+                ],
+                'attr' => [
+                    'class' =>'form-control'
+                ] 
+            ]) 
         ;
 
     }
 
-   
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-          'data_class' => ProductDTO::class,
+    
         ]);
     }
 }

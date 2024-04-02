@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Product\Application\DTO;
 
-class ProductDTO 
+class VariantDTO 
 {
     public function __construct(
         public ?string $name = null,
-        public ?array $categoriesIds = null,
+        public ?array $images = null
     )
     {
     }   
