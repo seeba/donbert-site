@@ -40,14 +40,9 @@ class ProductType extends AbstractType
                 'required' => true,
                 'multiple' => true,
                 'expanded' => true,
-                'label' => 'Kategoria',
-                'attr' => [
-                    'class' => 'input-group',
-                   
-                ],
-                    
+                
             ])
-            ->add('save', SubmitType::class)
+            
         ;
 
     }
