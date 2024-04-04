@@ -27,8 +27,8 @@ class Category
     #[ORM\OneToMany(targetEntity:"App\Product\Infrastructure\Entity\Category", mappedBy:"parent")]
     private Collection $children;
 
-    #[ORM\ManyToMany(targetEntity:"App\Product\Infrastructure\Entity\Category", mappedBy:"categories")]
-    private $products;
+    #[ORM\ManyToMany(targetEntity:"App\Product\Infrastructure\Entity\Product", mappedBy:"categories")]
+    private Collection $products;
 
     public function __construct(
         string $id,
@@ -38,6 +38,7 @@ class Category
         $this->id = $id;
         $this->name = $name;
         $this->children = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): string
@@ -62,13 +63,13 @@ class Category
         return $this;
     }
 
-    public function getChildren(): Collection
+    public function getChildren(): ArrayCollection
     {
         return $this->children;
     }
 
 
-    public function getProducts(): Collection
+    public function getProducts(): ArrayCollection
     {
         return $this->products;
     }
@@ -77,7 +78,7 @@ class Category
     public function addProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
-            $this->products[] = $product;
+            $this->products->add($product);
             $product->addCategory($this);
         }
 

@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class ProductController extends AbstractController
+final class VariantController extends AbstractController
 {
-    #[Route('admin/product/', name:'admin-product-index', methods:['GET', 'POST'])]
+    #[Route('admin/product/{productId}/variants/index', name:'admin-product-variant-index', methods:['GET', 'POST'])]
     public function index(GetProductsQueryInterface $getProductsQuery) 
     {
         $products = $getProductsQuery->execute();

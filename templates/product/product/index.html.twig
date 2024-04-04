@@ -1,0 +1,14 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block content %}
+    <ul>
+    {% for product in products %}
+        <li>{{product.name}} </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+{% block my_scripts %}
+
+
+
+{% endblock %}

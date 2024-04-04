@@ -37,6 +37,7 @@ class Product
         $this->id = $id;
         $this->name = $name;
         $this->variants = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): string
@@ -57,7 +58,7 @@ class Product
     public function addVariant(Variant $variant): self
     {
         if (!$this->variants->contains($variant)) {
-            $this->variants[] = $variant;
+            $this->variants->add($variant);
             $variant->setProduct($this);
         }
 
@@ -76,7 +77,7 @@ class Product
         return $this;
     }
 
-    public function getCategories(): Collection
+    public function getCategories(): ArrayCollection
     {
         return $this->categories;
     }
@@ -84,19 +85,20 @@ class Product
     public function addCategory(Category $category): self
     {
         if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
+            $this->categories->add($category);
             $category->addProduct($this);
+        
         }
 
         return $this;
     }
 
-    public function addCategories(Collection $categories): self
+    public function addCategories(array $categories): self
     {
-
         /**
          * @var Category $category
          */
+        
         foreach ($categories as $category) {
             $this->addCategory($category);
         }
@@ -112,6 +114,4 @@ class Product
 
         return $this;
     }
-
-
 }

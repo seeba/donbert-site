@@ -14,7 +14,7 @@ final class Product extends AggregateRoot
     private function __construct(
         private ProductId $id,
         private string $name,
-        private Collection $categories = new ArrayCollection()
+        private array $categories = []
     )
     {}
 
@@ -43,14 +43,14 @@ final class Product extends AggregateRoot
         return $this->id;
     }
 
-    public function getCategories(): Collection
+    public function getCategories(): array
     {
         return $this->categories;
     }
 
     public function addCategory(Category $category): self
     {
-        if (!$this->categories->contains($category)) {
+        if (!in_array($category, $this->categories, true)) {
             $this->categories[] = $category;
             $category->addProduct($this);
         }

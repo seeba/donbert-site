@@ -26,13 +26,17 @@ class CreateProductCommandHandler implements CommandHandlerInterface
        
        
         $categories = $this->categoryRepository->findByIds($command->categoriesIds);
-        dd($categories);
+        
         
         $product = Product::create(
             new ProductId($command->id),
             $command->name,  
-        );   
+        );  
         
+        foreach ($categories as $category) {
+            $product->addCategory($category);
+        }
+    
         $this->productRepository->save($product);
     }
 

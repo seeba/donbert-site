@@ -32,6 +32,7 @@ final class ProductTransformer
                 $product->getName()
             );
         }
+
         /**
          * @var Category[] $categories
          * @var Category $category
@@ -46,13 +47,12 @@ final class ProductTransformer
          * @var Collection $categoriesEntities
          */
         $categoriesEntities = $this->categoryRepository->findBy(['id' => $ids]);
-
+       
         if ($categoriesEntities != null) {
 
             $productEntity->addCategories($categoriesEntities);
         
         }
-    
     
         return $productEntity;
     }
