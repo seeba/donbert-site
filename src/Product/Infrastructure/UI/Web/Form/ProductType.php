@@ -29,9 +29,10 @@ class ProductType extends AbstractType
                 'choices' => $this->categoryManager->getParentCategoryChoices(),
                 'required' => true,
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
+                
             ])
-            ->add('save', SubmitType::class)
+            
         ;
 
     }
