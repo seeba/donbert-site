@@ -27,12 +27,6 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ],
-                'label_attr' => [
-                    'class' => 'form-label'
-                ],
                 'label' => 'Nazwa produktu'
              ])
             ->add('categoriesIds', ChoiceType::class, [

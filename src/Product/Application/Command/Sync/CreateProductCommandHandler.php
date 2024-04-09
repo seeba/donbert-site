@@ -22,12 +22,9 @@ class CreateProductCommandHandler implements CommandHandlerInterface
     }
     
     public function __invoke(CreateProductCommand $command)
-    {
-       
-       
+    {   
         $categories = $this->categoryRepository->findByIds($command->categoriesIds);
-        
-        
+          
         $product = Product::create(
             new ProductId($command->id),
             $command->name,  
@@ -39,6 +36,5 @@ class CreateProductCommandHandler implements CommandHandlerInterface
     
         $this->productRepository->save($product);
     }
-
 }
 

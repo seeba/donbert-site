@@ -6,7 +6,7 @@ namespace App\Product\Infrastructure\UI\Web\Controller\Admin;
 
 use App\Product\Application\Command\Sync\CreateProductCommand;
 use App\Product\Application\DTO\ProductDTO;
-use App\Product\Application\Query\GetProductsQueryInterface;
+use App\Product\Application\Query\GetVariantsQueryInterface;
 use App\Product\Infrastructure\UI\Web\Form\ProductType;
 use App\Shared\Application\Service\IdGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,17 +17,20 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class VariantController extends AbstractController
 {
-    #[Route('admin/product/{productId}/variants/index', name:'admin-product-variant-index', methods:['GET', 'POST'])]
-    public function index(GetProductsQueryInterface $getProductsQuery) 
+    #[Route('admin/products/{productId}/variants', name:'admin-product-variant-index', methods:['GET', 'POST'])]
+    public function index($productId, GetVariantsQueryInterface $getVariantsQuery) 
     {
-        $products = $getProductsQuery->execute();
-        return $this->render('product/product/index.html.twig',[
-            'products' => $products
+        $variants = $getVariantsQuery->execute($productId);
+        
+        return $this->render('product/variant/index.html.twig',[
+            'variants' => $variants,
+            'productId' => $productId
         ]);
     }
       
-    #[Route('admin/product/new', name:'admin-product-add', methods:['GET', 'POST'])]
+    #[Route('admin/products/{productId}/variants/new', name:'admin-product-variant-add', methods:['GET', 'POST'])]
     public function create(
+        $productId,
         Request $request, 
         MessageBusInterface $messageBus, 
         IdGeneratorInterface $idGenerator,

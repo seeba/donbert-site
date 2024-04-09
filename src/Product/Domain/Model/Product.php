@@ -14,7 +14,8 @@ final class Product extends AggregateRoot
     private function __construct(
         private ProductId $id,
         private string $name,
-        private array $categories = []
+        private array $categories = [],
+        private array $variants = [],
     )
     {}
 
@@ -59,6 +60,30 @@ final class Product extends AggregateRoot
     }
 
     public function removeCategory(Category $category): self
+    {
+        // if ($this->categories->removeElement($category)) {
+        //     $category->removeProduct($this);
+        // }
+
+        return $this;
+    }
+
+    public function getVariants(): array
+    {
+        return $this->variants;
+    }
+
+    public function addVariant(Variant $variant): self
+    {
+        if (!in_array($variant, $this->variants, true)) {
+            $this->variants[] = $variant;
+            
+        }
+
+        return $this;
+    }
+
+    public function removeVariant(Variant $variant): self
     {
         // if ($this->categories->removeElement($category)) {
         //     $category->removeProduct($this);
