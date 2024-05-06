@@ -32,7 +32,7 @@ class Variant
     private $attributes;
 
     #[ORM\OneToMany(targetEntity:"App\Product\Infrastructure\Entity\Image", mappedBy:"variant", cascade:["persist", "remove"])]
-    private $images;
+    private Collection $images;
 
     public function __construct(
         string $id,
@@ -42,6 +42,17 @@ class Variant
         $this->id = $id;
         $this->name = $name;
         $this->attributes = new ArrayCollection();
+        $this->images = new ArrayCollection();
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getProduct(): ?Product
@@ -56,7 +67,29 @@ class Variant
         return $this;
     }
 
-    public function getAtrributes(): Collection
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains(($image))) {
+            $this->images->add($image);
+            $image->setVariant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        $this->images->removeElement($image);
+
+        return $this;
+    }
+
+    public function getAtrributes(): ArrayCollection
     {
         return $this->attributes;
     }
@@ -64,7 +97,7 @@ class Variant
     public function addAttribute(Attribute $attribute ): self
     {
         if (!$this->attributes->contains($attribute)) {
-            $this->attributes[] = $attribute;
+            $this->attributes->add($attribute);
         }
 
         return $this;
@@ -76,4 +109,5 @@ class Variant
 
         return $this;
     }
+
 }

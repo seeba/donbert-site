@@ -4,7 +4,6 @@
     {{ form_start(form) }}
 
      {{ form_row(form.name) }}
-     {{ form_row(form.categoriesIds) }}
      {{ form_label(form.images) }}
 
     <div class="collection-container">
@@ -21,8 +20,9 @@
 
     {{ form_end(form) }}
 {% endblock %}
-{% block my_scripts %}
+{% block javascripts %}
 
+{{ parent() }}
 <script>
 document
   .querySelectorAll('.add_item_link')
@@ -31,11 +31,7 @@ document
   });
     function addFormToCollection(e) {
         const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-
         const item = document.createElement('div');
-        
-        
-
         item.innerHTML = collectionHolder
             .dataset
             .prototype
@@ -43,9 +39,7 @@ document
             /__name__/g,
             collectionHolder.dataset.index
             );
-
         collectionHolder.appendChild(item);
-
         collectionHolder.dataset.index++;
     };
 </script>

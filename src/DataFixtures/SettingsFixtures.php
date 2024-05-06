@@ -20,18 +20,22 @@ class SettingsFixtures extends Fixture implements FixtureGroupInterface
     public function load(ObjectManager $manager): void
     {
         $data = [
-            [
-                'width' => 900,
-                'height' => 1057
-            ],
-            [
-                'width' => 250,
-                'height' => 294
-            ],
-            [
-                'width' => 450,
-                'height' => 514
-            ]
+            'sizes' => [
+                [
+                    'width' => 900,
+                    'height' => 1057
+                ],
+                [
+                    'width' => 250,
+                    'height' => 294
+                ],
+                [
+                    'width' => 450,
+                    'height' => 514
+                ]
+                ],
+            'background_color' => '#ffffff'
+            
         ];
 
         $jsonData = json_encode($data);

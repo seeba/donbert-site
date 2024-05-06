@@ -11,6 +11,7 @@ final class Image extends AggregateRoot
     
     private function __construct(
         private ImageId $id,
+        private bool $main,
         private string $originalName,
         private string $fileName,
         private string $mimeType,
@@ -20,6 +21,7 @@ final class Image extends AggregateRoot
 
     public static function create(
         ImageId $id,
+        bool $main,
         string $originalName,
         string $fileName,
         string $mimeType,
@@ -27,12 +29,13 @@ final class Image extends AggregateRoot
         
     ): self {
 
-        $image = new self($id, $originalName, $fileName, $mimeType, $urls);
+        $image = new self($id, $main, $originalName, $fileName, $mimeType, $urls);
         return $image;
     }
 
     public static function restore(
         ImageId $id,
+        bool $main,
         string $originalName,
         string $fileName,
         string $mimeType,
@@ -40,7 +43,7 @@ final class Image extends AggregateRoot
         
     ): self {
 
-        $image = new self($id, $originalName, $fileName, $mimeType, $urls);
+        $image = new self($id, $main, $originalName, $fileName, $mimeType, $urls);
         return $image;
     }
 
@@ -49,4 +52,28 @@ final class Image extends AggregateRoot
         return $this->id;
     }
 
+    public function getMain(): bool
+    {
+        return $this->main;
+    }
+
+    public function getOriginalName(): string
+    {
+        return $this->originalName;
+    }
+
+    public function getFileName(): string
+    {
+        return $this->fileName;
+    }
+
+    public function getMimeType(): string
+    {
+        return $this->mimeType;
+    }
+
+    public function getUrls(): array
+    {
+        return $this->urls;
+    }
 }

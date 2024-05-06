@@ -32,8 +32,8 @@ final class ProductRepository implements ProductDomainRepositoryInterface
      */
     public function get(ProductId $id): Product
     {
+        
         $entity = $this->repository->find($id->toString());
-
         return $entity === null ? throw new ProductNotFoundException() : $this->transformer->toDomain($entity);
     }
 

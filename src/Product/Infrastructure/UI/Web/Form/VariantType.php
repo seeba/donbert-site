@@ -34,7 +34,7 @@ class VariantType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label'
                 ],
-                'label' => 'Nazwa produktu'
+                'label' => 'Nazwa wariantu'
              ])
             ->add('images', CollectionType::class, [
                 'entry_type' => ImageType::class,

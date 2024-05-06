@@ -23,9 +23,9 @@ class CreateVariantCommandHandler implements CommandHandlerInterface
     
     public function __invoke(CreateVariantCommand $command)
     {
-       
+        
         $product = $this->productRepository->get(new ProductId($command->productId));
-
+       
         $variant = Variant::create(
             new VariantId($command->id),
             $command->name

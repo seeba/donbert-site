@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\UI\Web\Controller\Admin;
 
+use App\Product\Application\Command\Sync\AddImagesToVariantCommand;
 use App\Product\Application\Command\Sync\CreateProductCommand;
+use App\Product\Application\Command\Sync\CreateVariantCommand;
 use App\Product\Application\DTO\ProductDTO;
+use App\Product\Application\DTO\VariantDTO;
 use App\Product\Application\Query\GetVariantsQueryInterface;
 use App\Product\Infrastructure\UI\Web\Form\ProductType;
+use App\Product\Infrastructure\UI\Web\Form\VariantType;
 use App\Shared\Application\Service\IdGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -21,7 +26,9 @@ final class VariantController extends AbstractController
     public function index($productId, GetVariantsQueryInterface $getVariantsQuery) 
     {
         $variants = $getVariantsQuery->execute($productId);
-        
+        $filesystem = new Filesystem();
+        $filesystem->mkdir('/tmp/photos', 0700);
+
         return $this->render('product/variant/index.html.twig',[
             'variants' => $variants,
             'productId' => $productId
@@ -36,23 +43,32 @@ final class VariantController extends AbstractController
         IdGeneratorInterface $idGenerator,
         ): Response
     {
-        $productDTO = new ProductDTO();
-        $form = $this->createForm(ProductType::class, $productDTO);
+     
+        $variantDTO = new VariantDTO($productId);
+        $form = $this->createForm(VariantType::class, $variantDTO);
         $form->handleRequest($request);
+        
 //dd($productDTO);
         if ($form->isSubmitted() && $form->isValid()) {
-            $command = new CreateProductCommand(
-                    $idGenerator->generate()->toString(), 
-                    $productDTO->name, 
-                    $productDTO->categoriesIds
-                );
             
-                $messageBus->dispatch($command);
+            
+            $variantId = $idGenerator->generate()->toString();
+            $createVariantCommand = new CreateVariantCommand(
+                    $variantId, 
+                    $variantDTO->name, 
+                    $variantDTO->productId);   
+            $messageBus->dispatch($createVariantCommand);
+          
+            $addImagesToVariantCommand = new AddImagesToVariantCommand(
+                $variantId,
+                $variantDTO->images
+            );
+            $messageBus->dispatch($addImagesToVariantCommand);
 
-            return $this->redirectToRoute('app_site_home');
+            return $this->redirectToRoute('admin-product-variant-index',['productId' => $productId]);
         }
 
-        return $this->render('product/product/create.html.twig', [
+        return $this->render('product/variant/create.html.twig', [
             'form' => $form->createView()
         ]);
     }   

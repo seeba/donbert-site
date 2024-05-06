@@ -77,7 +77,7 @@ class Product
         return $this;
     }
 
-    public function getCategories(): ArrayCollection
+    public function getCategories(): Collection
     {
         return $this->categories;
     }

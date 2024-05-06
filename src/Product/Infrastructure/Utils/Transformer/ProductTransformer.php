@@ -9,8 +9,10 @@ use App\Product\Domain\Model\CategoryId;
 use App\Product\Domain\Model\Product;
 use App\Product\Domain\Model\ProductId;
 use App\Product\Infrastructure\Entity\Product as ProductEntity;
+use App\Product\Infrastructure\Entity\Variant;
 use App\Product\Infrastructure\Repository\CategoryRepository;
 use App\Product\Infrastructure\Repository\ProductRepository;
+use App\Product\Infrastructure\Repository\VariantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -19,6 +21,8 @@ final class ProductTransformer
     public function __construct(
         private ProductRepository $productRepository,
         private CategoryRepository $categoryRepository,
+        private VariantRepository $variantRepository,
+        private VariantTransformer $variantTransformer
     )
     {     
     }
@@ -53,6 +57,17 @@ final class ProductTransformer
             $productEntity->addCategories($categoriesEntities);
         
         }
+
+        $variants = $product->getVariants();
+
+        foreach ($variants as $variant) {
+            $variantEntity = $this->variantRepository->findOneBy(['id' => $variant->getId()->toString()]);
+            if ($variantEntity === null) {
+                $variantEntity = $this->variantTransformer->fromDomain($variant);
+            }
+            $productEntity->addVariant($variantEntity);
+
+        }
     
         return $productEntity;
     }
@@ -65,13 +80,13 @@ final class ProductTransformer
         );
 
         $categoriesEntities = $productEntity->getCategories();
-        
+    
         foreach ($categoriesEntities as $categoryEntity) {
             $product->addCategory(
-                new Category(
+                Category::create(
                     new CategoryId($categoryEntity->getId()),
                     $categoryEntity->getName(),
-                    new CategoryId($categoryEntity->getParent()->getId())
+                    empty($categoryEntity->getParent()) ? null : new CategoryId($categoryEntity->getParent()->getId())
                     )
             );
         }
