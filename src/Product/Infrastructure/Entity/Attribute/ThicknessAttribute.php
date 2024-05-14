@@ -8,23 +8,23 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity()]
-class ColorAttribute extends Attribute
+class ThicknessAttribute extends Attribute
 {
-    #[ORM\Column(type:Types::STRING, length:255)]
-    private string $color;
+    #[ORM\Column(type:Types::FLOAT, length:255)]
+    private float $thickness;
 
     public function __construct(
         string $id,
         string $name,
-        string $color,
+        float $thickness,
     )
     {
         parent::__construct($id, $name);
-        $this->color = $color;
+        $this->thickness = $thickness;
     }
 
-    public function getColor():string
+    public function getThickness(): float
     {
-        return $this->color;
+        return $this->thickness;
     }
 }

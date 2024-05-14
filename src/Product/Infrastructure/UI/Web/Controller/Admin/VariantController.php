@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\UI\Web\Controller\Admin;
 
+use App\Product\Application\Command\Sync\AddAttributesToVariant\AddAttributesToVariantCommand;
 use App\Product\Application\Command\Sync\AddImagesToVariantCommand;
-use App\Product\Application\Command\Sync\CreateProductCommand;
 use App\Product\Application\Command\Sync\CreateVariantCommand;
-use App\Product\Application\DTO\ProductDTO;
 use App\Product\Application\DTO\VariantDTO;
 use App\Product\Application\Query\GetVariantsQueryInterface;
-use App\Product\Infrastructure\UI\Web\Form\ProductType;
 use App\Product\Infrastructure\UI\Web\Form\VariantType;
 use App\Shared\Application\Service\IdGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -48,9 +46,7 @@ final class VariantController extends AbstractController
         $form = $this->createForm(VariantType::class, $variantDTO);
         $form->handleRequest($request);
         
-//dd($productDTO);
         if ($form->isSubmitted() && $form->isValid()) {
-            
             
             $variantId = $idGenerator->generate()->toString();
             $createVariantCommand = new CreateVariantCommand(
@@ -64,6 +60,16 @@ final class VariantController extends AbstractController
                 $variantDTO->images
             );
             $messageBus->dispatch($addImagesToVariantCommand);
+            $attributes = [
+                $variantDTO->attributes->size,
+                $variantDTO->attributes->color,
+                $variantDTO->attributes->thickness,
+                $variantDTO->attributes->quantityPerRoll
+            ];
+
+            $addAttributesToVariantCommand = new AddAttributesToVariantCommand($variantId, $attributes);
+
+            $messageBus->dispatch($addAttributesToVariantCommand);
 
             return $this->redirectToRoute('admin-product-variant-index',['productId' => $productId]);
         }

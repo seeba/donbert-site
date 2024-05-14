@@ -8,23 +8,23 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity()]
-class ColorAttribute extends Attribute
+class QuantityPerRollAttribute extends Attribute
 {
-    #[ORM\Column(type:Types::STRING, length:255)]
-    private string $color;
+    #[ORM\Column(type:Types::INTEGER, length:255)]
+    private int $quantity;
 
     public function __construct(
         string $id,
         string $name,
-        string $color,
+        int $quantity,
     )
     {
         parent::__construct($id, $name);
-        $this->color = $color;
+        $this->quantity = $quantity;
     }
 
-    public function getColor():string
+    public function getQuantity(): int
     {
-        return $this->color;
+        return $this->quantity;
     }
 }

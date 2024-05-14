@@ -14,7 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\DiscriminatorMap([
     "base" => "Attribute", 
     "color" => "ColorAttribute", 
-    'size' => "SizeAttribute"
+    'size' => "SizeAttribute",
+    'thickness' => 'ThicknessAttribute',
+    'quantity_per_roll' => 'QuantityPerRollAttribute'
     ])]
 class Attribute
 {
@@ -25,12 +27,22 @@ class Attribute
     #[ORM\Column(type:Types::STRING, length:255)]
     private string $name;
 
-    public function __construct(
+    protected function __construct(
         string $id,
         string $name,
     )
     {
         $this->id = $id;
         $this->name = $name;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

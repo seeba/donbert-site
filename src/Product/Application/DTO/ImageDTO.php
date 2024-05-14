@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Product\Application\DTO;
 
-class VariantDTO 
+class ImageDTO 
 {
     public function __construct(
         public ?string $productId = null,

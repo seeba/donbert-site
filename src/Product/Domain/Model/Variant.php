@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Product\Domain\Model;
 
+use App\Product\Domain\Model\Attribute\Attribute;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +15,8 @@ final class Variant
     private function __construct(
         private VariantId $id,
         private string $name,
-        private array $images = []
+        private array $images = [],
+        private array $attributes = []
        
     )
     {}
@@ -62,5 +64,19 @@ final class Variant
         }
 
         return $this;
+    }
+
+    public function addAttribute(Attribute $attribute): self
+    {
+        if (!in_array($attribute, $this->attributes, true)) {
+            $this->attributes[] = $attribute;
+        }
+
+        return $this;
+    }
+
+    public function getAttributes(): array
+    {
+        return $this->attributes;
     }
 }

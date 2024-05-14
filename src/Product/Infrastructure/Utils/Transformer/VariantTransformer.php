@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\Utils\Transformer;
 
-use App\Product\Domain\Model\Category;
+use App\Product\Domain\Model\Image;
 use App\Product\Domain\Model\CategoryId;
 use App\Product\Domain\Model\VariantId;
 use App\Product\Domain\Model\Variant;
 use App\Product\Infrastructure\Entity\Variant as VariantEntity;
+use App\Product\Infrastructure\Entity\Image as ImageEntity;
 use App\Product\Infrastructure\Repository\VariantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,9 +18,9 @@ final class VariantTransformer
 {
     public function __construct(
         private VariantRepository $variantRepository,
-        private ImageTransformer $imageTransformer
-    )
-    {     
+        private ImageTransformer $imageTransformer,
+        private AttributeTransformer $attributeTransformer
+    ) {     
     }
 
     public function fromDomain(Variant $variant): VariantEntity
@@ -41,6 +42,15 @@ final class VariantTransformer
             
             $variantEntity->addImage($this->imageTransformer->fromDomain($image));
         }
+
+        $attributes = $variant->getAttributes();
+
+        foreach ($attributes as $attribute) {
+            if ($attribute !== null) {
+                $variantEntity->addAttribute($this->attributeTransformer->fromDomain($attribute));
+            }
+            
+        }
     
         return $variantEntity;
     }
@@ -54,8 +64,17 @@ final class VariantTransformer
 
         $images = $variantEntity->getImages();
 
+        /**
+         * @var ImageEntity $image
+         */
         foreach($images as $image) {
             $variant->addImage($this->imageTransformer->toDomain($image));
+        }
+
+        $attributes = $variantEntity->getAtrributes();
+
+        foreach ($attributes as $attribute) {
+            $variant->addAttribute($this->attributeTransformer->toDomain($attribute));
         }
 
         return $variant;

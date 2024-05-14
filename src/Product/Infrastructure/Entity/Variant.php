@@ -89,7 +89,7 @@ class Variant
         return $this;
     }
 
-    public function getAtrributes(): ArrayCollection
+    public function getAtrributes(): Collection
     {
         return $this->attributes;
     }

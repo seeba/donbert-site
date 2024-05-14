@@ -12,8 +12,6 @@ final readonly class CreateVariantCommand implements CommandInterface
         public string $id,
         public string $name,
         public string $productId
-    )
-    {
-        
+    ) {  
     }
 }

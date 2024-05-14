@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Product\Application\Command\Sync;
 
-use App\Product\Domain\Model\Product;
 use App\Product\Domain\Model\ProductId;
 use App\Product\Domain\Model\Variant;
 use App\Product\Domain\Model\VariantId;

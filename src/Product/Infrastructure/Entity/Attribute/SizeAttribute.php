@@ -10,16 +10,31 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity()]
 class SizeAttribute extends Attribute
 {
-    #[ORM\Column(type:Types::STRING, length:255)]
-    private string $size;
+    #[ORM\Column(type:Types::INTEGER)]
+    private int $width;
+
+    #[ORM\Column(type:Types::INTEGER)]
+    private int $height;
 
     public function __construct(
         string $id,
         string $name,
-        string $size,
+        int $width,
+        int $height
     )
     {
         parent::__construct($id, $name);
-        $this->size = $size;
+        $this->height = $height;
+        $this->width = $width;
+    }
+
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    public function getHeight(): int
+    {
+        return $this->height;
     }
 }

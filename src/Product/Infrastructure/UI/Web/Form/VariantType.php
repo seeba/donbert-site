@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\UI\Web\Form;
 
-use App\Product\Application\DTO\ProductDTO;
 use App\Product\Application\DTO\VariantDTO;
+use App\Product\Domain\Service\AttributeServiceInterface;
 use App\Product\Domain\Service\CategoryManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -18,22 +18,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class VariantType extends AbstractType
 {
     public function __construct(
-        private CategoryManagerInterface $categoryManager
-    )
-    {
+        private CategoryManagerInterface $categoryManager,
+        private AttributeServiceInterface $attributeService,
+    ) {
     }
-    
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        
         $builder
             ->add('name', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ],
-                'label_attr' => [
-                    'class' => 'form-label'
-                ],
+               
                 'label' => 'Nazwa wariantu'
              ])
             ->add('images', CollectionType::class, [
@@ -48,12 +43,17 @@ class VariantType extends AbstractType
                 ]
                 
             ])
-            ->add('save', SubmitType::class)
+            ->add('attributes', AttributesType::class, [
+                'label' => 'Rozmiar',
+
+            ])
+
+            ->add('save', SubmitType::class, [
+                'label' => 'Zapisz'
+            ])
         ;
 
     }
-
-   
 
     public function configureOptions(OptionsResolver $resolver)
     {
