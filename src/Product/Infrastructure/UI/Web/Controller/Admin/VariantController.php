@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class VariantController extends AbstractController
 {
-    #[Route('admin/products/{productId}/variants', name:'admin-product-variant-index', methods:['GET', 'POST'])]
+    #[Route('admin/products/{productId}/variants', name:'admin-products-variants-index', methods:['GET', 'POST'])]
     public function index($productId, GetVariantsQueryInterface $getVariantsQuery) 
     {
         $variants = $getVariantsQuery->execute($productId);
@@ -33,7 +33,7 @@ final class VariantController extends AbstractController
         ]);
     }
       
-    #[Route('admin/products/{productId}/variants/new', name:'admin-product-variant-add', methods:['GET', 'POST'])]
+    #[Route('admin/products/{productId}/variants/new', name:'admin-products-variants-add', methods:['GET', 'POST'])]
     public function create(
         $productId,
         Request $request, 
@@ -71,7 +71,7 @@ final class VariantController extends AbstractController
 
             $messageBus->dispatch($addAttributesToVariantCommand);
 
-            return $this->redirectToRoute('admin-product-variant-index',['productId' => $productId]);
+            return $this->redirectToRoute('admin-products-variants-index',['productId' => $productId]);
         }
 
         return $this->render('product/variant/create.html.twig', [

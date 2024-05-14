@@ -31,7 +31,7 @@
                                         {{product.name}}
                                     </td>
                                     <td>
-                                        <a href="{{ path('admin-product-variant-index', {productId: product.id})}}">Warianty</a>
+                                        <a href="{{ path('admin-products-variants-index', {productId: product.id})}}">Warianty</a>
                                     </td>
                                 </tr>
                                
@@ -41,7 +41,7 @@
                     </table>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ path('admin-product-add')}}" class="btn btn-primary">Dodaj nowy produkt</a>
+                    <a href="{{ path('admin-products-add')}}" class="btn btn-primary">Dodaj nowy produkt</a>
                 </div>
             </div>
         </div>

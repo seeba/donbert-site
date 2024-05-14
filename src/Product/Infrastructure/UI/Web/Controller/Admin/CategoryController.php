@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class CategoryController extends AbstractController
 {
-    #[Route('admin/category/new', name:'admin-category-add', methods:['GET', 'POST'])]
+    #[Route('admin/categories/new', name:'admin-categories-add', methods:['GET', 'POST'])]
     public function create(
         Request $request, 
         MessageBusInterface $messageBus, 

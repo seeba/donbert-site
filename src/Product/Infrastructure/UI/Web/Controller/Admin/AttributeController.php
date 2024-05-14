@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AttributeController extends AbstractController
 {
-    #[Route('admin/products/attributes', name:'admin-product-attribute-index', methods:['GET', 'POST'])]
+    #[Route('admin/products/attributes', name:'admin-products-attributes-index', methods:['GET', 'POST'])]
     public function index(GetAttributesQuery $query)
     {
         $attributes = $query->execute();
@@ -31,7 +31,7 @@ class AttributeController extends AbstractController
         ]); 
     }
     
-    #[Route('admin/products/attributes/new', name:'admin-product-attribute-add', methods:['GET', 'POST'])]
+    #[Route('admin/products/attributes/new', name:'admin-products-attributes-add', methods:['GET', 'POST'])]
     public function create(
         Request $request, 
         MessageBusInterface $messageBus, 
@@ -61,7 +61,7 @@ class AttributeController extends AbstractController
             
             $messageBus->dispatch($createAttributeCommand);
 
-            return $this->redirectToRoute('admin-product-attribute-index');  
+            return $this->redirectToRoute('admin-products-attributes-index');  
         }
 
         return $this->render('product/attribute/create.html.twig', [

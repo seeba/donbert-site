@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ProductController extends AbstractController
 {
-    #[Route('admin/product', name:'admin-product-index', methods:['GET', 'POST'])]
+    #[Route('admin/products', name:'admin-products-index', methods:['GET', 'POST'])]
     public function index(GetProductsQueryInterface $getProductsQuery) 
     {
         $products = $getProductsQuery->execute();
@@ -26,7 +26,7 @@ final class ProductController extends AbstractController
         ]);
     }
       
-    #[Route('admin/product/new', name:'admin-product-add', methods:['GET', 'POST'])]
+    #[Route('admin/products/new', name:'admin-products-add', methods:['GET', 'POST'])]
     public function create(
         Request $request, 
         MessageBusInterface $messageBus, 
