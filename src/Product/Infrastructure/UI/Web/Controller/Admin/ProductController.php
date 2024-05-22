@@ -15,9 +15,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class ProductController extends AbstractController
+#[Route('admin/products')]
+class ProductController extends AbstractController
 {
-    #[Route('admin/products', name:'admin-products-index', methods:['GET', 'POST'])]
+    #[Route('/', name:'admin-products-index', methods:['GET', 'POST'])]
     public function index(GetProductsQueryInterface $getProductsQuery) 
     {
         $products = $getProductsQuery->execute();
@@ -26,7 +27,7 @@ final class ProductController extends AbstractController
         ]);
     }
       
-    #[Route('admin/products/new', name:'admin-products-add', methods:['GET', 'POST'])]
+    #[Route('/new', name:'admin-products-add', methods:['GET', 'POST'])]
     public function create(
         Request $request, 
         MessageBusInterface $messageBus, 
@@ -36,7 +37,7 @@ final class ProductController extends AbstractController
         $productDTO = new ProductDTO();
         $form = $this->createForm(ProductType::class, $productDTO);
         $form->handleRequest($request);
-//dd($productDTO);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $command = new CreateProductCommand(
                     $idGenerator->generate()->toString(), 

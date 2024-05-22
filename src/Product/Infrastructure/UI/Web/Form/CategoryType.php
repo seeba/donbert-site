@@ -9,6 +9,7 @@ use App\Product\Domain\Service\CategoryManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -26,13 +27,18 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', TextType::class, [
+                'label' => 'Nazwa kategorii'
+            ])
             ->add('parentId', ChoiceType::class, [
+                'label' => 'Kategoria nadrzędna',
                 'choices' => $this->categoryManager->getParentCategoryChoices(),
                 'required' => false,
                 'placeholder' => 'Wybierz kategorię nadrzędną'
             ])
-            ->add('save', SubmitType::class);
+            ->add('save', SubmitType::class, [
+                'label' => 'Zapisz'
+            ]);
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $form = $event->getForm();
             $categoryDTO = $event->getData();
@@ -61,6 +67,7 @@ class CategoryType extends AbstractType
             'choices' => $categoryDTO ? $this->categoryManager->getParentCategoryChoices() : [],
             'required' => false,
             'placeholder' => 'Wybierz kategorię nadrzędną',
+            'label' => 'Kategoria nadrzędna'
         ]);
     }
 

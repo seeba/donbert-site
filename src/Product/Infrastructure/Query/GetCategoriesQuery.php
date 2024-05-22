@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\Query;
 
-use App\Product\Application\Query\GetVariantsQueryInterface;
-use App\Product\Infrastructure\Entity\Variant;
+use App\Product\Application\Query\GetCategoriesQueryInterface;
+use App\Product\Infrastructure\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class GetVariantsQuery implements GetVariantsQueryInterface
+final class GetCategoriesQuery implements GetCategoriesQueryInterface
 
 {
     public function __construct(
@@ -17,19 +17,16 @@ final class GetVariantsQuery implements GetVariantsQueryInterface
     {
     }
 
-    public function execute(string $productId) :array
+    public function execute() :array
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
 
         $queryBuilder
             ->select(
-                'v.id',
-                'v.name'
+                'c.id',
+                'c.name'
                 )
-            ->from(Variant::class, 'v')
-            ->where('v.product = :product')
-            ->setParameter('product', $productId)
-            ;
+            ->from(Category::class, 'c');
 
         $results = $queryBuilder->getQuery()->getArrayResult();
 

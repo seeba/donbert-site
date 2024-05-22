@@ -18,12 +18,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class VariantController extends AbstractController
+#[Route('admin/products/{productId}/variants')]
+class VariantController extends AbstractController
 {
-    #[Route('admin/products/{productId}/variants', name:'admin-products-variants-index', methods:['GET', 'POST'])]
+    #[Route('/', name:'admin-products-variants-index', methods:['GET', 'POST'])]
     public function index($productId, GetVariantsQueryInterface $getVariantsQuery) 
     {
         $variants = $getVariantsQuery->execute($productId);
+        
         $filesystem = new Filesystem();
         $filesystem->mkdir('/tmp/photos', 0700);
 
@@ -33,7 +35,7 @@ final class VariantController extends AbstractController
         ]);
     }
       
-    #[Route('admin/products/{productId}/variants/new', name:'admin-products-variants-add', methods:['GET', 'POST'])]
+    #[Route('/new', name:'admin-products-variants-add', methods:['GET', 'POST'])]
     public function create(
         $productId,
         Request $request, 
