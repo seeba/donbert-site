@@ -16,16 +16,21 @@ class SizeAttribute extends Attribute
     #[ORM\Column(type:Types::INTEGER)]
     private int $height;
 
+    #[ORM\Column(type:Types::INTEGER)]
+    private int $literCapacity;
+
     public function __construct(
         string $id,
         string $name,
         int $width,
-        int $height
+        int $height,
+        int $literCapacity
     )
     {
         parent::__construct($id, $name);
         $this->height = $height;
         $this->width = $width;
+        $this->literCapacity = $literCapacity;
     }
 
     public function getWidth(): int
@@ -36,5 +41,10 @@ class SizeAttribute extends Attribute
     public function getHeight(): int
     {
         return $this->height;
+    }
+
+    public function getLiterCapacity(): int
+    {
+        return $this->literCapacity;
     }
 }

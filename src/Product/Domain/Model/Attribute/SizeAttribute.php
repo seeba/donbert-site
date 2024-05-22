@@ -10,7 +10,8 @@ final class SizeAttribute extends Attribute
         private AttributeId $id,
         private string $name,
         private int $width,
-        private int $height   
+        private int $height,
+        private int $literCapacity   
     ) {  
         parent::__construct($id, $name);
     }
@@ -19,11 +20,12 @@ final class SizeAttribute extends Attribute
         AttributeId $id,
         string $name,
         int $width,
-        int $height
+        int $height,
+        int $literCapacity
     
     ): self {
 
-        $attribute = new self($id, $name, $width, $height);
+        $attribute = new self($id, $name, $width, $height, $literCapacity);
         return $attribute;
     }
 
@@ -31,10 +33,11 @@ final class SizeAttribute extends Attribute
         AttributeId $id,
         string $name,
         int $width,
-        int $height 
+        int $height,
+        int $literCapacity 
     ): self {
 
-        $attribute = new self($id, $name, $width, $height);
+        $attribute = new self($id, $name, $width, $height, $literCapacity);
         return $attribute;
     }
 
@@ -51,5 +54,9 @@ final class SizeAttribute extends Attribute
     public function getHeight(): int
     {
         return $this->height;
+    }
+    public function getLiterCapacity(): int
+    {
+        return $this->literCapacity;
     }
 }

@@ -79,6 +79,12 @@
                         {{ form_widget(form.height, {'attr': {'class': 'form-control'}}) }}    
                         </div>
                     {% endif %}
+                    {% if form.liter_capacity is defined %}
+                    <div class="form-group">
+                        {{ form_label(form.liter_capacity) }}
+                        {{ form_widget(form.liter_capacity, {'attr': {'class': 'form-control'}}) }}    
+                        </div>
+                    {% endif %}
                     </div>
 
                     

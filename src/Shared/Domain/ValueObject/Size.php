@@ -8,7 +8,8 @@ class Size
 {
     public function __construct(
         private int $width, 
-        private int $height
+        private int $height,
+        private int $literCapacity
     ) {    
     }
 
@@ -16,13 +17,14 @@ class Size
     {
         return [
             'width' => $this->width,
-            'height' => $this->height
+            'height' => $this->height,
+            'liter_capacity' => $this->literCapacity
         ];
     }
 
     public function toString(): string 
     {
-        return $this->width.'x'.$this->height;
+        return $this->width.'x'.$this->height.' '.$this->literCapacity.' l';
     }
 
     public function __toString(): string
@@ -38,5 +40,10 @@ class Size
     public function getHeight(): int
     {
         return $this->height;
+    }
+
+    public function getLiterCapacity(): int
+    {
+        return $this->literCapacity;
     }
 }

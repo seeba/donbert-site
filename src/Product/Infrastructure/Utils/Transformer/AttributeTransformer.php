@@ -57,9 +57,8 @@ final class AttributeTransformer
             $attribute->getId()->toString(),
             $attribute->getName(),
             (int) $attribute->getWidth(),
-            (int) $attribute->getHeight()
-        );
-
+            (int) $attribute->getHeight(),
+            (int) $attribute->getLiterCapacity()       );
         return $attributeEntity;
     }
 
@@ -103,7 +102,8 @@ final class AttributeTransformer
             new AttributeId($attributeEntity->getId()),
             $attributeEntity->getName(),
             $attributeEntity->getWidth(),
-            $attributeEntity->getHeight()
+            $attributeEntity->getHeight(),
+            $attributeEntity->getLiterCapacity()
         );
     }
 

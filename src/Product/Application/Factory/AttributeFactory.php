@@ -43,7 +43,8 @@ class AttributeFactory
             new AttributeId($id),
             $createAttributeDTO->name,
             $createAttributeDTO->size->getWidth(),
-            $createAttributeDTO->size->getHeight()
+            $createAttributeDTO->size->getHeight(),
+            $createAttributeDTO->size->getLiterCapacity()
         );
 
         return $sizeAttribute;

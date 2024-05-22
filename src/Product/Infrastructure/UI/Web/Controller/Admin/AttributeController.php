@@ -49,10 +49,18 @@ class AttributeController extends AbstractController
             $createAttributeDTO = new CreateAttributeDTO(
                 $data['name'],
                 AttributeType::from($data['type']),
-                !isset($data['color']) ? null : new Color($data['color']),
-                !isset($data['width']) ? null : new Size((int)$data['width'], (int)$data['height']),
-                !isset($data['thickness']) ? null : new Thickness((float)$data['thickness']),
-                !isset($data['quantity_per_roll']) ? null : new Quantity((int)$data['quantity_per_roll']),
+                !isset($data['color']) 
+                    ? null 
+                    : new Color($data['color']),
+                !isset($data['width']) 
+                    ? null 
+                    : new Size((int)$data['width'], (int)$data['height'], (int)$data['liter_capacity']),
+                !isset($data['thickness']) 
+                    ? null 
+                    : new Thickness((float)$data['thickness']),
+                !isset($data['quantity_per_roll']) 
+                    ? null 
+                    : new Quantity((int)$data['quantity_per_roll']),
             );
             $createAttributeCommand = new CreateAttributeCommand(
                 $attributeId,

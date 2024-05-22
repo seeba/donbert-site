@@ -66,7 +66,13 @@ class AttributeType extends AbstractType
                     ]
                 ])
                 ->add('height', TextType::class, [
-                    'label' => 'Wysokość',
+                    'label' => 'Długość',
+                    'constraints' => [
+                        new NotBlank()
+                    ]
+                ])
+                ->add('liter_capacity', TextType::class, [
+                    'label' => 'Litraż',
                     'constraints' => [
                         new NotBlank()
                     ]
@@ -83,7 +89,7 @@ class AttributeType extends AbstractType
 
         } elseif ($type === 'quantity_per_roll') {
             $form
-            ->add('thickness', TextType::class, [
+            ->add('quantity_per_roll', TextType::class, [
                 'label' => 'Ilość sztuk na rolce/ w paczce',
                 'constraints' => [
                     new NotBlank()
