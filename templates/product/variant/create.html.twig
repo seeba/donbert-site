@@ -21,29 +21,111 @@
                                         {{ form_label(form.name) }}
                                         {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                                     </div>
-                                    <div class="form-group">
-                                        {{ form_label(form.attributes.size) }}
-                                        {{ form_widget(form.attributes.size, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                    <div class="form-group">
-                                        {{ form_label(form.attributes.color) }}
-                                        {{ form_widget(form.attributes.color, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                    <div class="form-group">
-                                        {{ form_label(form.attributes.thickness) }}
-                                        {{ form_widget(form.attributes.thickness, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                    <div class="form-group">
-                                        {{ form_label(form.attributes.quantityPerRoll) }}
-                                        {{ form_widget(form.attributes.quantityPerRoll, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
                                 </div>
                                 <div class="card-footer">
                                 </div>
                             </div>
+
+                            <div class="card card-primary">
+                                <div class="card-header ">
+                                    <h3 class="card-title">Rozmiary</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        {{ form_label(form.attributes.size) }}
+
+                                        <div class="collection-container">
+                                            <div 
+                                                class="collection-sizes"
+                                                data-index="{{ form.attributes.size|length > 0 ? form.attributes.size|last.vars.name + 1 : 0 }}"
+                                                data-prototype='{{ form_widget(form.attributes.size.vars.prototype) }}'>  
+                                            </div>
+
+                                            {{ form_widget(form.attributes.size) }}
+                                        </div>
+                                    </div>
+                                        <button type="button" class="btn btn-primary add_size_link" data-collection-holder-class="collection-sizes">Dodaj zdjęcie</button>
+                                </div>
+                                <div class="card-footer">
+                                </div>
+                            </div>
+
+                            <div class="card card-primary">
+                                <div class="card-header ">
+                                    <h4 class="card-title">Kolory</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        {{ form_label(form.attributes.color) }}
+
+                                        <div class="collection-container">
+                                            <div 
+                                                class="collection-colors"
+                                                data-index="{{ form.attributes.color|length > 0 ? form.attributes.color|last.vars.name + 1 : 0 }}"
+                                                data-prototype='{{ form_widget(form.attributes.color.vars.prototype) }}'>  
+                                            </div>
+
+                                            {{ form_widget(form.attributes.color) }}
+                                        </div>
+                                    </div>
+                                        <button type="button" class="btn btn-primary add_color_link" data-collection-holder-class="collection-colors">Dodaj kolor</button>
+                                </div>
+                                <div class="card-footer">
+                                </div>
+                            </div>
+
+                            <div class="card card-primary">
+                                <div class="card-header ">
+                                    <h4 class="card-title">Grubość</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        {{ form_label(form.attributes.thickness) }}
+
+                                        <div class="collection-container">
+                                            <div 
+                                                class="collection-thickness"
+                                                data-index="{{ form.attributes.thickness|length > 0 ? form.attributes.thickness|last.vars.name + 1 : 0 }}"
+                                                data-prototype='{{ form_widget(form.attributes.thickness.vars.prototype) }}'>  
+                                            </div>
+
+                                            {{ form_widget(form.attributes.thickness) }}
+                                        </div>
+                                    </div>
+                                        <button type="button" class="btn btn-primary add_thickness_link" data-collection-holder-class="collection-thickness">Dodaj grubość</button>
+                                </div>
+                                <div class="card-footer">
+                                </div>
+                            </div>
+
+                            <div class="card card-primary">
+                                <div class="card-header ">
+                                    <h4 class="card-title">Ilość sztuk na rolce</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        {{ form_label(form.attributes.quantityPerRoll) }}
+
+                                        <div class="collection-container">
+                                            <div 
+                                                class="collection-quantity-per-roll"
+                                                data-index="{{ form.attributes.quantityPerRoll|length > 0 ? form.attributes.thickness|last.vars.name + 1 : 0 }}"
+                                                data-prototype='{{ form_widget(form.attributes.quantityPerRoll.vars.prototype) }}'>  
+                                            </div>
+
+                                            {{ form_widget(form.attributes.quantityPerRoll) }}
+                                        </div>
+                                    </div>
+                                        <button type="button" class="btn btn-primary add_quantity_per_roll_link" data-collection-holder-class="collection-quantity-per-roll">Dodaj ilość</button>
+                                </div>
+                                <div class="card-footer">
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="col-md-6 col-sm-12">
+
                             <div class="card card-primary">
                                 <div class="card-header ">
                                     <h3 class="card-title">Zdjęcia</h3>
@@ -68,6 +150,9 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
+
+                        
                     </div>
                     
                     
@@ -78,35 +163,31 @@
             </div>
         </div>
     </div>
-   
-
-    
-    
 
     {{ form_end(form) }}
 {% endblock %}
 {% block javascripts %}
 
 {{ parent() }}
+
 <script>
 document
-  .querySelectorAll('.add_item_link')
+  .querySelectorAll('.add_item_link, .add_size_link, .add_color_link, .add_thickness_link, .add_quantity_per_roll_link')
   .forEach(btn => {
-      btn.addEventListener("click", addFormToCollection)
+    btn.addEventListener("click", addFormToCollection);
   });
-    function addFormToCollection(e) {
-        const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-        const item = document.createElement('div');
-        item.innerHTML = collectionHolder
-            .dataset
-            .prototype
-            .replace(
-            /__name__/g,
-            collectionHolder.dataset.index
-            );
-        collectionHolder.appendChild(item);
-        collectionHolder.dataset.index++;
-    };
+
+function addFormToCollection(e) {
+  const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+  console.log(collectionHolder);
+  const item = document.createElement('div');
+  item.innerHTML = collectionHolder
+    .dataset
+    .prototype
+    .replace(/__name__/g, collectionHolder.dataset.index);
+  collectionHolder.appendChild(item);
+  collectionHolder.dataset.index++;
+}
 </script>
 
 {% endblock %}

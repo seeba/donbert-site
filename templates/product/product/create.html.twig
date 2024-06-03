@@ -16,13 +16,15 @@
                 </div>
                 {% for category in form.categoriesIds %}
                     <div class="form-check"> 
-                    
-                    {{ form_widget(category, {'attr': {'class': 'form-check-input'}}) }}
-                    {{ form_label(category, null, {'label_attr': {'class': 'form-check-label'}}) }}
-                </div>
-                    
-                {% endfor %}
+                        {{ form_widget(category, {'attr': {'class': 'form-check-input'}}) }}
+                        {{ form_label(category, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                    </div>
                 
+                {% endfor %}
+                <div class="form-group">
+                    {{ form_label(form.size.size) }}
+                    {{ form_widget(form.size.size, {'attr': {'class': 'form-control'}}) }}
+                </div>
 
                 
             </div>

@@ -8,7 +8,6 @@ use App\Product\Application\DTO\VariantDTO;
 use App\Product\Domain\Service\AttributeServiceInterface;
 use App\Product\Domain\Service\CategoryManagerInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -43,16 +42,13 @@ class VariantType extends AbstractType
                 ]
                 
             ])
-            ->add('attributes', AttributesType::class, [
+            ->add('attributes', VariantAttributesType::class, [
                 'label' => 'Rozmiar',
 
             ])
-
             ->add('save', SubmitType::class, [
                 'label' => 'Zapisz'
-            ])
-        ;
-
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

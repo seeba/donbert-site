@@ -7,10 +7,10 @@ namespace App\Product\Application\DTO;
 class VariantAttributesDTO 
 {
     public function __construct(
-        public ?string $size = null,
-        public ?string $color = null,
-        public ?string $thickness = null,
-        public ?string $quantityPerRoll = null
+        public ?array $size = null,
+        public ?array $color = null,
+        public ?array $thickness = null,
+        public ?array $quantityPerRoll = null
     )
     {
     }

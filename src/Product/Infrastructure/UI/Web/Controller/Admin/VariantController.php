@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Product\Infrastructure\UI\Web\Controller\Admin;
 
 use App\Product\Application\Command\Sync\AddAttributesToVariant\AddAttributesToVariantCommand;
-use App\Product\Application\Command\Sync\AddImagesToVariantCommand;
-use App\Product\Application\Command\Sync\CreateVariantCommand;
+use App\Product\Application\Command\Sync\AddImagesToVariant\AddImagesToVariantCommand;
+use App\Product\Application\Command\Sync\CreateVariant\CreateVariantCommand;
 use App\Product\Application\DTO\VariantDTO;
 use App\Product\Application\Query\GetVariantsQueryInterface;
 use App\Product\Infrastructure\UI\Web\Form\VariantType;
@@ -49,7 +49,7 @@ class VariantController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            
+           
             $variantId = $idGenerator->generate()->toString();
             $createVariantCommand = new CreateVariantCommand(
                     $variantId, 

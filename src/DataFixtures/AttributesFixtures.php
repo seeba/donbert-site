@@ -89,52 +89,62 @@ class AttributesFixtures extends Fixture
             [
                 'name' => '500x950',
                 'width' => 500,
-                'height' => 950
+                'height' => 950,
+                'literCapacity' => 0
             ],
             [
-                'name' => '600x800',
+                'name' => '600x800 60l.',
                 'width' => 600,
-                'height' => 800
+                'height' => 800,
+                'literCapacity' => 60
             ],
             [
-                'name' => '700x1050',
+                'name' => '700x1050 120l.',
                 'width' => 700,
-                'height' => 1050
+                'height' => 1050,
+                'literCapacity' => 120
             ],
             [
-                'name' => '500x600',
+                'name' => '500x600 35l.',
                 'width' => 500,
-                'height' => 600
+                'height' => 600,
+                'literCapacity' => 35
             ],
             [
-                'name' => '700x1100',
+                'name' => '700x1100 120l.',
                 'width' => 700,
-                'height' => 1100
+                'height' => 1100,
+                'literCapacity' => 0
             ],
             [
-                'name' => '910x1100',
+                'name' => '910x1100 160l.',
                 'width' => 910,
-                'height' => 1100
+                'height' => 1100,
+                'literCapacity' => 0
             ],
             [
-                'name' => '1010x1250',
+                'name' => '1010x1250 250l.',
                 'width' => 1010,
-                'height' => 1250
+                'height' => 1250,
+                'literCapacity' => 160
             ],
             [
-                'name' => '500x670',
+                'name' => '500x670 35l.',
                 'width' => 500,
-                'height' => 670
+                'height' => 670,
+                'literCapacity' => 35
             ],
             [
                 'name' => '1200x1500',
                 'width' => 1200,
-                'height' => 1500
+                'height' => 1500,
+                'literCapacity' => 0
             ],
             [
                 'name' => '500x950',
                 'width' => 500,
-                'height' => 950
+                'height' => 950,
+                'literCapacity' => 0
             ],
         ];
 
@@ -175,7 +185,8 @@ class AttributesFixtures extends Fixture
                 $this->idGenerator->generate()->toString(),
                 $size['name'],
                 $size['width'],
-                $size['height']
+                $size['height'],
+                $size['literCapacity']
             );
             $manager->persist($sizeAttr);
         }

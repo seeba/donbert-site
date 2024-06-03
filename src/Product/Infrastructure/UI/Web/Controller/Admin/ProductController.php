@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\UI\Web\Controller\Admin;
 
-use App\Product\Application\Command\Sync\CreateProductCommand;
+use App\Product\Application\Command\Sync\CreateProduct\CreateProductCommand;
 use App\Product\Application\DTO\ProductDTO;
 use App\Product\Application\Query\GetProductsQueryInterface;
 use App\Product\Infrastructure\UI\Web\Form\ProductType;
@@ -37,12 +37,13 @@ class ProductController extends AbstractController
         $productDTO = new ProductDTO();
         $form = $this->createForm(ProductType::class, $productDTO);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $command = new CreateProductCommand(
                     $idGenerator->generate()->toString(), 
                     $productDTO->name, 
-                    $productDTO->categoriesIds
+                    $productDTO->categoriesIds,
+                    $productDTO->size
                 );
             
                 $messageBus->dispatch($command);

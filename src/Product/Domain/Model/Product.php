@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace App\Product\Domain\Model;
 
+use App\Product\Domain\Model\Attribute\Attribute;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 final class Product extends AggregateRoot
 {
-    
     private function __construct(
         private ProductId $id,
         private string $name,
         private array $categories = [],
         private array $variants = [],
+        private array $attributes = []
     )
     {}
 
@@ -95,5 +96,19 @@ final class Product extends AggregateRoot
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function addAttribute(Attribute $attribute): self
+    {
+        if (!in_array($attribute, $this->attributes, true)) {
+            $this->attributes[] = $attribute;
+        }
+
+        return $this;
+    }
+
+    public function getAttributes(): array
+    {
+        return $this->attributes;
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Product\Application\Command\Sync;
+namespace App\Product\Application\Command\Sync\CreateVariant;
 
 use App\Product\Domain\Model\ProductId;
 use App\Product\Domain\Model\Variant;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\Entity;
 
+use App\Product\Infrastructure\Entity\Attribute\Attribute;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -23,6 +24,12 @@ class Product
     #[ORM\OneToMany(targetEntity:"App\Product\Infrastructure\Entity\Variant", mappedBy:"product", cascade:["persist", "remove"])]
     private $variants;
 
+    #[ORM\ManyToMany(targetEntity:"App\Product\Infrastructure\Entity\Attribute\Attribute")]
+    #[ORM\JoinTable(name:"product_attributes")]
+    #[ORM\JoinColumn(name:"product_id", referencedColumnName:"id")]
+    #[ORM\InverseJoinColumn(name:"attributte_id", referencedColumnName:"id")]
+    private $attributes;
+
     #[ORM\ManyToMany(targetEntity:"App\Product\Infrastructure\Entity\Category")]
     #[ORM\JoinTable(name:"product_category")]
     #[ORM\JoinColumn(name:"product_id", referencedColumnName:"id")]
@@ -38,6 +45,7 @@ class Product
         $this->name = $name;
         $this->variants = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->attributes = new ArrayCollection();
     }
 
     public function getId(): string
@@ -111,6 +119,22 @@ class Product
         if ($this->categories->removeElement($category)) {
             $category->removeProduct($this);
         }
+
+        return $this;
+    }
+
+    public function addAttribute(Attribute $attribute ): self
+    {
+        if (!$this->attributes->contains($attribute)) {
+            $this->attributes->add($attribute);
+        }
+
+        return $this;
+    }
+
+    public function removeAttribute(Attribute $attribute): self
+    {
+        $this->attributes->removeElement($attribute);
 
         return $this;
     }

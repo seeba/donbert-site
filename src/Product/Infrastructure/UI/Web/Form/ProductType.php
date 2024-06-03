@@ -6,6 +6,7 @@ namespace App\Product\Infrastructure\UI\Web\Form;
 
 use App\Product\Application\DTO\ProductDTO;
 use App\Product\Domain\Service\CategoryManagerInterface;
+use App\Product\Infrastructure\UI\Web\Form\Attributes\SizeAttributeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -36,6 +37,10 @@ class ProductType extends AbstractType
                 'expanded' => true,
                 
             ])
+            ->add('size', SizeAttributeType::class, [
+                'label' => 'Rozmiar'
+            ])
+            
             
         ;
 

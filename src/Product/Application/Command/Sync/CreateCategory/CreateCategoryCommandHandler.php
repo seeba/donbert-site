@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Product\Application\Command\Sync;
+namespace App\Product\Application\Command\Sync\CreateCategory;
 
 use App\Product\Domain\Model\Category;
 use App\Product\Domain\Model\CategoryId;
@@ -15,10 +15,8 @@ class CreateCategoryCommandHandler implements CommandHandlerInterface
 {
     public function __construct(
         private CategoryRepositoryInterface $categoryRepository
-    )
-    {
+    ) {
     }
-    
     
     public function __invoke(CreateCategoryCommand $command)
     {
@@ -31,6 +29,5 @@ class CreateCategoryCommandHandler implements CommandHandlerInterface
         
         $this->categoryRepository->save($category);
     }
-
 }
 

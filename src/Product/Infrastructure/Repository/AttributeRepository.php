@@ -21,4 +21,9 @@ final class AttributeRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($attribute);
         $this->getEntityManager()->flush();
     }
+
+    public function get($id)
+    {
+        return $this->find($id);
+    }
 }

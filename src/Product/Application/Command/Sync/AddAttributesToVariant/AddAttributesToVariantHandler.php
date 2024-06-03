@@ -24,11 +24,14 @@ class AddAttributesToVariantHandler implements CommandHandlerInterface
     {
         $variant = $this->variantRepository->get(new VariantId($command->variantId));
         
-        foreach ($command->attributes as $attributeId) {
-            if (!empty($attributeId)){ 
-                $attribute = $this->attributeRepository->get(new AttributeId($attributeId));
-            } 
-            $variant->addAttribute($attribute);
+        foreach ($command->attributes as $attr) {
+
+            foreach ($attr as $attributeId) {
+                if (!empty($attributeId)){ 
+                    $attribute = $this->attributeRepository->get(new AttributeId($attributeId));
+                } 
+                $variant->addAttribute($attribute);
+            }  
         }
 
         $this->variantRepository->save($variant);        

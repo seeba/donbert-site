@@ -9,6 +9,7 @@ class ProductDTO
     public function __construct(
         public ?string $name = null,
         public ?array $categoriesIds = null,
+        public ?array $size = null
     )
     {
     }   

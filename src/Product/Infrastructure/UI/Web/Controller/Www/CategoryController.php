@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\UI\Web\Controller\Www;
 
-use App\Product\Application\Command\Sync\CreateCategoryCommand;
-use App\Product\Application\DTO\CategoryDTO;
-use App\Product\Infrastructure\UI\Web\Form\CategoryType;
 use App\Product\Domain\Service\CategoryManagerInterface;
 use App\Shared\Application\Service\IdGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

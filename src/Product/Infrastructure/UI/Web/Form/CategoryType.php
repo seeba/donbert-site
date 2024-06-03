@@ -20,8 +20,7 @@ class CategoryType extends AbstractType
     
     public function __construct(
         private CategoryManagerInterface $categoryManager
-        )
-    {
+    ) {
     }
     
     public function buildForm(FormBuilderInterface $builder, array $options)

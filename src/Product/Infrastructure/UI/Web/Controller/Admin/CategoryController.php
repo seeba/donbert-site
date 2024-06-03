@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\UI\Web\Controller\Admin;
 
-use App\Product\Application\Command\Sync\CreateCategoryCommand;
+use App\Product\Application\Command\Sync\CreateCategory\CreateCategoryCommand;
 use App\Product\Application\DTO\CategoryDTO;
 use App\Product\Application\Query\GetCategoriesQueryInterface;
 use App\Product\Infrastructure\UI\Web\Form\CategoryType;
