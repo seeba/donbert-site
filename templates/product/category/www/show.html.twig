@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+     <div class="page-content bg-white">
+        <!-- inner page banner -->
+        <div class="dlab-bnr-inr overlay-black-middle bg-pt" style="background-image:url(images/banner/bnr4.jpg);">
+            <div class="container">
+                <div class="dlab-bnr-inr-entry">
+                    <h1 class="text-white">{{category.name}}</h1>
+					<!-- Breadcrumb row -->
+					<div class="breadcrumb-row">
+						<ul class="list-inline">
+							<li><a href="index.html">Home</a></li>
+							<li>Shop Grid 4</li>
+						</ul>
+					</div>
+					<!-- Breadcrumb row END -->
+                </div>
+            </div>
+        </div>
+        <!-- inner page banner END -->
+        <!-- contact area -->
+        <div class="section-full content-inner">
+            <!-- Product -->
+            <div class="container">
+                <div class="row">
+                {% for product in category.products %}
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="item-box m-b10">
+							<div class="item-img">
+								<img src="{{ asset('uploads/images/018fe539-a85c-73f7-a558-8ad3d57b3853/450x514/665f8bb0384de.jpg')}}" alt=""/>
+								<div class="item-info-in">
+									<ul>
+										<li><a href="shop-cart.html"><i class="ti-shopping-cart"></i></a></li>
+										<li><a href="javascript:void(0);"><i class="ti-eye"></i></a></li>
+										<li><a href="javascript:void(0);"><i class="ti-heart"></i></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="item-info text-center text-black p-a10">
+								<h6 class="item-title font-weight-500"><a href="shop-product-details.html">{{product.name}}</a></h6>
+								{# <ul class="item-review">
+									<li><i class="fas fa-star"></i></li>
+									<li><i class="fas fa-star"></i></li>
+									<li><i class="fas fa-star"></i></li>
+									<li><i class="fas fa-star-half-alt"></i></li>
+									<li><i class="far fa-star"></i></li>
+								</ul> #}
+                                {% for attribute in product.attributes%}
+                                <h4 class="item-price"><span class="text-primary">{{attribute.name}}</span></h4>
+                                {% endfor %}
+								
+							</div>
+						</div>
+					</div>
+                {% endfor %}
+					
+					
+				</div>
+			</div>
+            <!-- Product END -->
+		</div>
+		<!-- Shop Service info -->
+		<div class="section-full p-t50 p-b20 bg-primary text-white">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-lg-4">
+						<div class="icon-bx-wraper left shop-service-info m-b30">
+							<div class="icon-md text-black radius"> 
+								<a href="javascript:void(0);" class="icon-cell text-white"><i class="fas fa-gift"></i></a> 
+							</div>
+							<div class="icon-content">
+								<h5 class="dlab-tilte">Free shipping on orders $60+</h5>
+								<p>Order more than 60$ and you will get free shippining Worldwide. More info.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-lg-4">
+						<div class="icon-bx-wraper left shop-service-info m-b30">
+							<div class="icon-md text-black radius"> 
+								<a href="javascript:void(0);" class="icon-cell text-white"><i class="fas fa-plane"></i></a> 
+							</div>
+							<div class="icon-content">
+								<h5 class="dlab-tilte">Worldwide delivery</h5>
+								<p>We deliver to the following countries: USA, Canada, Europe, Australia</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-lg-4">
+						<div class="icon-bx-wraper left shop-service-info m-b30">
+							<div class="icon-md text-black radius"> 
+								<a href="javascript:void(0);" class="icon-cell text-white"><i class="fas fa-history"></i></a> 
+							</div>
+							<div class="icon-content">
+								<h5 class="dlab-tilte">60 days money back guranty!</h5>
+								<p>Not happy with our product, feel free to return it, we will refund 100% your money!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Shop Service info End -->
+    </div>
+    
+{% endblock %}

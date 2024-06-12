@@ -63,13 +63,13 @@ class Category
         return $this;
     }
 
-    public function getChildren(): ArrayCollection
+    public function getChildren(): Collection
     {
         return $this->children;
     }
 
 
-    public function getProducts(): ArrayCollection
+    public function getProducts(): Collection
     {
         return $this->products;
     }

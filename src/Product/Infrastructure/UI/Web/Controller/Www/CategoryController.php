@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\UI\Web\Controller\Www;
 
+use App\Product\Application\Query\GetProducts\GetProductsForCategoryQueryInterface;
 use App\Product\Domain\Service\CategoryManagerInterface;
 use App\Shared\Application\Service\IdGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,18 +15,22 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class CategoryController extends AbstractController
 {
-    #[Route('category/new', name:'category-add', methods:['GET', 'POST'])]
+    #[Route('/category/{categoryId}', name:'www-category', methods:['GET', 'POST'])]
     public function create(
+        $categoryId,
         Request $request, 
-        MessageBusInterface $messageBus, 
-        CategoryManagerInterface $categoryManager,
         IdGeneratorInterface $idGenerator,
+        GetProductsForCategoryQueryInterface $getProductsForCategoryQuery
         ): Response
     {
-        
+        $category = $getProductsForCategoryQuery->execute('018fdeda-7582-7111-bdd4-7a83d5f31544');
 
-        return $this->render('site/index.html.twig', [
-            'title' => "tutu"
+        $category = $getProductsForCategoryQuery->execute($categoryId);
+        dump($category);
+
+        return $this->render('product/category/www/show.html.twig', [
+            'title' => "tutu",
+            'category' => $category
         ]);
     }   
 }
