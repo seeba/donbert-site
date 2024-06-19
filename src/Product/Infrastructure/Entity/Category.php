@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity()]
 #[ORM\Table(name:"categories")]
@@ -19,6 +20,10 @@ class Category
 
     #[ORM\Column(type:Types::STRING, length:255)]
     private string $name;
+
+    #[ORM\Column(length:255, unique:true)]
+    #[Gedmo\Slug(fields:['name'])]
+    private string $slug;
 
     #[ORM\ManyToOne(targetEntity:"App\Product\Infrastructure\Entity\Category", inversedBy:"children")]
     #[ORM\JoinColumn(name:"parent_id", referencedColumnName:"id", onDelete:"SET NULL")]
@@ -49,6 +54,11 @@ class Category
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 
     public function getParent(): ?Category

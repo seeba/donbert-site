@@ -40,6 +40,18 @@ class ProductType extends AbstractType
             ->add('size', SizeAttributeType::class, [
                 'label' => 'Rozmiar'
             ])
+            ->add('images', CollectionType::class, [
+                'entry_type' => ImageType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'label' => 'Zdjęcia',
+            
+                'attr' => [
+                    'class' => 'collection-images',
+                   
+                ]
+                
+            ])
             
             
         ;

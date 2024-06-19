@@ -36,6 +36,9 @@ class Product
     #[ORM\InverseJoinColumn(name:"category_id", referencedColumnName:"id")]
     private $categories;
 
+    #[ORM\OneToMany(targetEntity:"App\Product\Infrastructure\Entity\Image", mappedBy:"variant", cascade:["persist", "remove"])]
+    private Collection $images;
+
     public function __construct(
         string $id,
         string $name,
@@ -46,6 +49,7 @@ class Product
         $this->variants = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->attributes = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): string
@@ -135,6 +139,28 @@ class Product
     public function removeAttribute(Attribute $attribute): self
     {
         $this->attributes->removeElement($attribute);
+
+        return $this;
+    }
+
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains(($image))) {
+            $this->images->add($image);
+            $image->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        $this->images->removeElement($image);
 
         return $this;
     }

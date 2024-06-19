@@ -36,8 +36,12 @@ class Image
     private string $urls;
 
     #[ORM\ManyToOne(targetEntity:"App\Product\Infrastructure\Entity\Variant", inversedBy:"images")]
-    #[ORM\JoinColumn(nullable:false)]
+    #[ORM\JoinColumn(nullable:true)]
     private $variant;
+
+    #[ORM\ManyToOne(targetEntity:"App\Product\Infrastructure\Entity\Product", inversedBy:"images")]
+    #[ORM\JoinColumn(nullable:true)]
+    private $product;
 
     public function __construct(
         string $id,
@@ -65,6 +69,18 @@ class Image
     public function setVariant(?Variant $variant): self
     {
         $this->variant = $variant;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
 
         return $this;
     }

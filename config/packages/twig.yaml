@@ -2,6 +2,8 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
         footer_service: '@App\Site\Infrastructure\UI\Web\Twig\FooterService'
+        header_service: '@App\Site\Infrastructure\UI\Web\Twig\HeaderService'
+        menu_service: '@App\Site\Infrastructure\UI\Web\Twig\MenuService'
         admin_menu_service: '@App\Shared\Infrastructure\UI\Web\Twig\AdminMenuService'
 
 when@test:

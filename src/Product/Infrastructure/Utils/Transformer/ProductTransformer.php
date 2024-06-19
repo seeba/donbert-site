@@ -19,7 +19,7 @@ use App\Product\Infrastructure\Repository\VariantRepository;
 use App\Product\Infrastructure\Repository\AttributeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-
+use App\Product\Infrastructure\Entity\Image as ImageEntity;
 final class ProductTransformer
 {
     public function __construct(
@@ -28,7 +28,8 @@ final class ProductTransformer
         private VariantRepository $variantRepository,
         private AttributeRepository $attributeRepository,
         private VariantTransformer $variantTransformer,
-        private AttributeTransformer $attributeTransformer
+        private AttributeTransformer $attributeTransformer,
+        private ImageTransformer $imageTransformer
     ) {     
     }
 
@@ -85,6 +86,14 @@ final class ProductTransformer
             $productEntity->addVariant($variantEntity);
 
         }
+
+        $images = $product->getImages();
+
+        foreach($images as $image) {
+            
+            $productEntity->addImage($this->imageTransformer->fromDomain($image));
+        }
+        
     
         return $productEntity;
     }
@@ -106,6 +115,15 @@ final class ProductTransformer
                     empty($categoryEntity->getParent()) ? null : new CategoryId($categoryEntity->getParent()->getId())
                     )
             );
+        }
+
+        $images = $productEntity->getImages();
+
+        /**
+         * @var ImageEntity $image
+         */
+        foreach($images as $image) {
+            $product->addImage($this->imageTransformer->toDomain($image));
         }
 
         return $product;

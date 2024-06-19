@@ -6,5 +6,5 @@ namespace App\Product\Application\Query\GetProducts;
 
 interface GetProductsForCategoryQueryInterface
 {
-    public function execute(string $categoryId): ?array;
+    public function execute(string $slug): ?array;
 }

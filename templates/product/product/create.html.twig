@@ -2,39 +2,88 @@
 
 {% block content %}
     <div class="row">
-    <div class="col-12 col-xl-6">
-        <div class="card">
-            <div class="card-header">
-
-            </div>
-            {{ form_start(form) }}
-            <div class="card-body">
+        <div class="col-12 col-xl-6">
+            <div class="card card-primary">
                 
-                <div class="form-group"> 
-                    {{ form_label(form.name) }}
-                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                {% for category in form.categoriesIds %}
-                    <div class="form-check"> 
-                        {{ form_widget(category, {'attr': {'class': 'form-check-input'}}) }}
-                        {{ form_label(category, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                {{ form_start(form) }}
+                    <div class="card-body">
+                        <div class="card card-success">
+                            <div class="card-header ">
+                                <h3 class="card-title">Dane podstawowe</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group"> 
+                                    {{ form_label(form.name) }}
+                                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                {% for category in form.categoriesIds %}
+                                    <div class="form-check"> 
+                                        {{ form_widget(category, {'attr': {'class': 'form-check-input'}}) }}
+                                        {{ form_label(category, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                                    </div>
+                                {% endfor %}
+                                <div class="form-group">
+                                    {{ form_label(form.size.size) }}
+                                    {{ form_widget(form.size.size, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-primary">
+                            <div class="card-header ">
+                                <h3 class="card-title">Zdjęcia</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    {{ form_label(form.images) }}
+
+                                    <div class="collection-container">
+                                        <div 
+                                            class="collection-images"
+                                            data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
+                                            data-prototype='{{ form_widget(form.images.vars.prototype) }}'>  
+                                        </div>
+
+                                        {{ form_widget(form.images) }}
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-primary add_item_link" data-collection-holder-class="collection-images">Dodaj zdjęcie</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                
-                {% endfor %}
-                <div class="form-group">
-                    {{ form_label(form.size.size) }}
-                    {{ form_widget(form.size.size, {'attr': {'class': 'form-control'}}) }}
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Zapisz</button>
                 </div>
-
-                
+                {{ form_end(form) }}
             </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Zapisz</button>
-            </div>
-            {{ form_end(form) }}
-
         </div>
     </div>
-</div>
     
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+<script>
+document
+  .querySelectorAll('.add_item_link')
+  .forEach(btn => {
+    btn.addEventListener("click", addFormToCollection);
+  });
+
+function addFormToCollection(e) {
+  const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+  console.log(collectionHolder);
+  const item = document.createElement('div');
+  item.innerHTML = collectionHolder
+    .dataset
+    .prototype
+    .replace(/__name__/g, collectionHolder.dataset.index);
+  collectionHolder.appendChild(item);
+  collectionHolder.dataset.index++;
+}
+</script>
+
 {% endblock %}

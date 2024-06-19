@@ -17,7 +17,7 @@ final class GetProductsForCategoryQuery implements GetProductsForCategoryQueryIn
     ) {
     }
 
-    public function execute(string $categoryId) :array
+    public function execute(string $slug) :?array
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
 
@@ -34,10 +34,14 @@ final class GetProductsForCategoryQuery implements GetProductsForCategoryQueryIn
             ->addSelect('a')
             ->addSelect('va')
             ->addSelect('vi')
-            ->where('c.id = :id')
-            ->setParameter('id', $categoryId)
+            ->where('c.slug = :slug')
+            ->setParameter('slug', $slug)
             ->getQuery()
             ->getArrayResult();
+
+        if (empty($result)) {
+            return null;
+        }
 
         return $result[0];
     }

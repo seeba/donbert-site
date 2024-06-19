@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\UI\Web\Controller\Admin;
 
+use App\Product\Application\Command\Sync\AddImagesToProduct\AddImagesToProductCommand;
 use App\Product\Application\Command\Sync\CreateProduct\CreateProductCommand;
 use App\Product\Application\DTO\ProductDTO;
 use App\Product\Application\Query\GetProductsQueryInterface;
@@ -39,14 +40,19 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            $command = new CreateProductCommand(
-                    $idGenerator->generate()->toString(), 
-                    $productDTO->name, 
-                    $productDTO->categoriesIds,
-                    $productDTO->size
-                );
+            $productId = $idGenerator->generate()->toString();
             
-                $messageBus->dispatch($command);
+            $messageBus->dispatch(new CreateProductCommand(
+                $productId, 
+                $productDTO->name, 
+                $productDTO->categoriesIds,
+                $productDTO->size
+            ));
+
+            $messageBus->dispatch(new AddImagesToProductCommand(
+                $productId,
+                $productDTO->images
+            ));
 
             return $this->redirectToRoute('app_site_home');
         }

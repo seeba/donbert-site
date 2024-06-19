@@ -16,7 +16,8 @@ final class Product extends AggregateRoot
         private string $name,
         private array $categories = [],
         private array $variants = [],
-        private array $attributes = []
+        private array $attributes = [],
+        private array $images = []
     )
     {}
 
@@ -43,6 +44,20 @@ final class Product extends AggregateRoot
     public function getId(): ProductId
     {
         return $this->id;
+    }
+
+    public function getImages() : array
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!in_array($image, $this->images, true)) {
+            $this->images[] = $image;
+        }
+
+        return $this;
     }
 
     public function getCategories(): array
