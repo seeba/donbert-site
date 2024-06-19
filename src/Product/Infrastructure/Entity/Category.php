@@ -78,12 +78,10 @@ class Category
         return $this->children;
     }
 
-
     public function getProducts(): Collection
     {
         return $this->products;
     }
-
 
     public function addProduct(Product $product): self
     {

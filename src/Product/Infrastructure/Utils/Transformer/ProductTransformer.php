@@ -9,16 +9,11 @@ use App\Product\Domain\Model\CategoryId;
 use App\Product\Domain\Model\Product;
 use App\Product\Domain\Model\ProductId;
 use App\Product\Domain\Model\Attribute\Attribute;
-use App\Product\Domain\Model\Attribute\AttributeId;
-
 use App\Product\Infrastructure\Entity\Product as ProductEntity;
-use App\Product\Infrastructure\Entity\Variant;
 use App\Product\Infrastructure\Repository\CategoryRepository;
 use App\Product\Infrastructure\Repository\ProductRepository;
 use App\Product\Infrastructure\Repository\VariantRepository;
 use App\Product\Infrastructure\Repository\AttributeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use App\Product\Infrastructure\Entity\Image as ImageEntity;
 final class ProductTransformer
 {
@@ -60,9 +55,7 @@ final class ProductTransformer
         $categoriesEntities = $this->categoryRepository->findBy(['id' => $ids]);
        
         if ($categoriesEntities != null) {
-
             $productEntity->addCategories($categoriesEntities);
-        
         }
 
         $attributes = $product->getAttributes();
@@ -72,7 +65,6 @@ final class ProductTransformer
         
         foreach ($attributes as $attribute) {
             $attributeEntity = $this->attributeRepository->get($attribute->getId()->toString());
-
             $productEntity->addAttribute($attributeEntity);
         }
 
@@ -84,17 +76,14 @@ final class ProductTransformer
                 $variantEntity = $this->variantTransformer->fromDomain($variant);
             }
             $productEntity->addVariant($variantEntity);
-
         }
 
         $images = $product->getImages();
 
-        foreach($images as $image) {
-            
+        foreach($images as $image) {    
             $productEntity->addImage($this->imageTransformer->fromDomain($image));
         }
         
-    
         return $productEntity;
     }
 

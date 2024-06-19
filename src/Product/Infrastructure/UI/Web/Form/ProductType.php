@@ -31,8 +31,7 @@ class ProductType extends AbstractType
                 'choices' => $this->categoryManager->getParentCategoryChoices(),
                 'required' => true,
                 'multiple' => true,
-                'expanded' => true,
-                
+                'expanded' => true,     
             ])
             ->add('size', SizeAttributeType::class, [
                 'label' => 'Rozmiar'
@@ -44,10 +43,8 @@ class ProductType extends AbstractType
                 'label' => 'Zdjęcia',
             
                 'attr' => [
-                    'class' => 'collection-images',
-                   
-                ]
-                
+                    'class' => 'collection-images',     
+                ]           
             ]);
     }
 
