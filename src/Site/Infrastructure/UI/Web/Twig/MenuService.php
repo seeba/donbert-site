@@ -11,8 +11,7 @@ class MenuService
 {
     public function __construct(
         private Environment $twig,
-        private GetCategoriesForMenuQueryInterface $query
-        
+        private GetCategoriesForMenuQueryInterface $query     
     ) {
     }
 

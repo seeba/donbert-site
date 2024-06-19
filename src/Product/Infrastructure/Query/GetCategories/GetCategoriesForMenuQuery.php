@@ -28,4 +28,3 @@ class GetCategoriesForMenuQuery implements GetCategoriesForMenuQueryInterface
             ->getArrayResult();
     }
 }
-
