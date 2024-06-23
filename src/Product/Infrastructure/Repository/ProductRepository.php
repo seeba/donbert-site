@@ -19,4 +19,14 @@ final class ProductRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($product);
         $this->getEntityManager()->flush();
     }
+
+    public function persist(Product $product): void
+    {
+        $this->getEntityManager()->persist($product);
+    }
+
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
 }
