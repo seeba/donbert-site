@@ -10,14 +10,30 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     public function __construct(
-        private string $id,
+        private UserId $id,
         private string $email,
         private string $password,
-        private array $roles,
+        private array $roles = [],
     ) {  
     }
 
-    public function getId(): string
+    public static function create(
+        UserId $id,
+        string $email,
+        string $password
+    ): self {
+        return new self($id, $email, $password);
+    }
+
+    public static function restore(
+        UserId $id,
+        string $email,
+        string $password
+    ): self {
+        return new self($id, $email, $password);
+    }
+
+    public function getId(): UserId
     {
         return $this->id;
     }

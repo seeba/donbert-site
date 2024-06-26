@@ -28,7 +28,7 @@ class User
         string $id,
         string $email,
         string $password,
-        array $roles,
+        array $roles = [],
     ) { 
         $this->id = $id;
         $this->email = $email;
