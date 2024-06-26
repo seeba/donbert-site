@@ -26,9 +26,7 @@ final class Product extends AggregateRoot
         string $name,
     
     ): self {
-
-        $product = new self($id, $name);
-        return $product;
+        return  new self($id, $name);
     }
 
     public static function restore(

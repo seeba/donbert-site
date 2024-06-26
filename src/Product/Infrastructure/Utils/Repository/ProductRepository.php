@@ -17,8 +17,7 @@ final class ProductRepository implements ProductDomainRepositoryInterface
     public function __construct(
         private DoctrineProductRepository $repository,
         private ProductTransformer $transformer,
-    )
-    {    
+    ) {    
     }
 
     public function save(Product $product): void
@@ -34,7 +33,9 @@ final class ProductRepository implements ProductDomainRepositoryInterface
     {
         
         $entity = $this->repository->find($id->toString());
-        return $entity === null ? throw new ProductNotFoundException() : $this->transformer->toDomain($entity);
+        return $entity === null 
+            ? throw new ProductNotFoundException() 
+            : $this->transformer->toDomain($entity);
     }
 
     public function findAll() : Collection
