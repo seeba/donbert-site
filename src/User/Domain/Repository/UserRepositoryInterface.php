@@ -12,4 +12,8 @@ interface UserRepositoryInterface
     public function get(UserId $id): User;
 
     public function save(User $user): void;
+
+    public function findUserByEmail(string $email): User;
+
+    public function findById(UserId $id): User;
 }

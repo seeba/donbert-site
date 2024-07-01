@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      App\Newsletter:
+        type: attribute
+        is_bundle: false
+        dir: '%kernel.project_dir%/src/Newsletter/Infrastructure/Entity'
+        prefix: 'App\Newsletter\Infrastructure\Entity'
+        alias: App\Newsletter

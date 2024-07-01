@@ -1,3 +1,8 @@
+imports: 
+    - { resource: '../../src/Product/Infrastructure/config/doctrine.yaml' }
+    - { resource: '../../src/User/Infrastructure/config/doctrine.yaml' }
+    - { resource: '../../src/Newsletter/Infrastructure/config/doctrine.yaml' }
+    - { resource: '../../src/Setting/Infrastructure/config/doctrine.yaml' }
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
@@ -14,32 +19,7 @@ doctrine:
         validate_xml_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
-        mappings:
-            App\Product:
-                type: attribute
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/Product/Infrastructure/Entity'
-                prefix: 'App\Product\Infrastructure\Entity'
-                alias: App\Product
-            App\Product\Attribute:
-                type: attribute
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/Product/Infrastructure/Entity/Attribute'
-                prefix: 'App\Product\Infrastructure\Entity\Attribute'
-                alias: App\Product\Attribute
-            App\Newsletter:
-                type: attribute
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/Newsletter/Infrastructure/Entity'
-                prefix: 'App\Newsletter\Infrastructure\Entity'
-                alias: App\Newsletter
-            App\Setting:
-                type: attribute
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/Setting/Infrastructure/Entity'
-                prefix: 'App\Setting\Infrastructure\Entity'
-                alias: App\Setting
-                
+                      
 when@test:
     doctrine:
         dbal:

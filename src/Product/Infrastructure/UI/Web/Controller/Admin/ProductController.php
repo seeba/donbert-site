@@ -23,7 +23,7 @@ class ProductController extends AbstractController
     public function index(GetProductsQueryInterface $getProductsQuery) 
     {
         $products = $getProductsQuery->execute();
-        return $this->render('product/product/index.html.twig',[
+        return $this->render('admin/product/product/index.html.twig',[
             'products' => $products
         ]);
     }
@@ -57,7 +57,7 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('app_site_home');
         }
 
-        return $this->render('product/product/create.html.twig', [
+        return $this->render('admin/product/product/create.html.twig', [
             'form' => $form->createView()
         ]);
     }   

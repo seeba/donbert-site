@@ -34,4 +34,22 @@ class UserRepository implements UserRepositoryInterface
             ? throw new UserNotFoundException()
             : $this->transformer->toDomain($user);
     }
+
+    public function findUserByEmail(string $email): User
+    {
+        $user = $this->repository->findOneBy(['email' => $email]);
+
+        return $user === null
+            ? throw new UserNotFoundException()
+            : $this->transformer->toDomain($user);
+    }
+
+    public function findById(UserId $id): User
+    {
+        $user = $this->repository->find($id->toString());
+
+        return $user === null 
+            ? throw new UserNotFoundException()
+            : $this->transformer->toDomain($user);
+    }
 }

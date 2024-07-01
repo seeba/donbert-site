@@ -24,16 +24,28 @@ class User
     #[ORM\Column(type:Types::JSON)]
     private array $roles = [];
 
+    #[ORM\Column(type:Types::BOOLEAN, options:["default" => false] )]
+    private bool $isActive = false;
+
+    #[ORM\OneToOne(
+        targetEntity:"App\User\Infrastructure\Entity\ProfileImage",
+        mappedBy:"user",
+        cascade: ["persist", "remove"]
+        )]
+    private ?ProfileImage $profileImage = null;
+
     public function __construct(
         string $id,
         string $email,
         string $password,
         array $roles = [],
+        bool $isActive = false
     ) { 
         $this->id = $id;
         $this->email = $email;
         $this->password = $password;
         $this->roles = $roles; 
+        $this->isActive = $isActive;
     }
 
     public function getId(): string
@@ -49,6 +61,11 @@ class User
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
     }
 
     public function getRoles(): array
@@ -74,5 +91,30 @@ class User
     public function getUserIdentifier(): string
     {
         return $this->email;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    public function setActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
+    }
+
+    public function getProfileImage(): ?ProfileImage
+    {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage(?ProfileImage $profileImage): void
+    {
+        $this->profileImage = $profileImage;
+
+        // Set the owning side of the relation if necessary
+        if ($profileImage !== null && $profileImage->getUser() !== $this) {
+            $profileImage->setUser($this);
+        }
     }
 }

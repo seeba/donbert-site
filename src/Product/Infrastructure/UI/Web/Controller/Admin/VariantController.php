@@ -29,7 +29,7 @@ class VariantController extends AbstractController
         $filesystem = new Filesystem();
         $filesystem->mkdir('/tmp/photos', 0700);
 
-        return $this->render('product/variant/index.html.twig',[
+        return $this->render('admin/product/variant/index.html.twig',[
             'variants' => $variants,
             'productId' => $productId
         ]);
@@ -76,7 +76,7 @@ class VariantController extends AbstractController
             return $this->redirectToRoute('admin-products-variants-index',['productId' => $productId]);
         }
 
-        return $this->render('product/variant/create.html.twig', [
+        return $this->render('admin/product/variant/create.html.twig', [
             'form' => $form->createView()
         ]);
     }   

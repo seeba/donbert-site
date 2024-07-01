@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      App\Setting:
+        type: attribute
+        is_bundle: false
+        dir: '%kernel.project_dir%/src/Setting/Infrastructure/Entity'
+        prefix: 'App\Setting\Infrastructure\Entity'
+        alias: App\Setting

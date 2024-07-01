@@ -26,7 +26,7 @@ class AttributeController extends AbstractController
     public function index(GetAttributesQuery $query)
     {
         $attributes = $query->execute();
-        return $this->render('product/attribute/index.html.twig', [
+        return $this->render('admin/product/attribute/index.html.twig', [
             'attributes' => $attributes
         ]); 
     }
@@ -72,7 +72,7 @@ class AttributeController extends AbstractController
             return $this->redirectToRoute('admin-products-attributes-index');  
         }
 
-        return $this->render('product/attribute/create.html.twig', [
+        return $this->render('admin/product/attribute/create.html.twig', [
             'form' => $form->createView()
         ]); 
     }

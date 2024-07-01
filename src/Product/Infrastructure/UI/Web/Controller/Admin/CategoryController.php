@@ -23,7 +23,7 @@ class CategoryController extends AbstractController
     {
         $categories= $getCategoriesQuery->execute();
 
-        return $this->render('product/category/admin/index.html.twig',[
+        return $this->render('admin/product/category/admin/index.html.twig',[
             'categories' => $categories
         ]);
     }
@@ -53,7 +53,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('admin-categories-index');
         }
 
-        return $this->render('product/category/admin/create.html.twig', [
+        return $this->render('admin/product/category/admin/create.html.twig', [
             'form' => $form->createView()
         ]);
     }   

@@ -14,23 +14,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         private string $email,
         private string $password,
         private array $roles = [],
+        private bool $isActive = false,
+        private ?ProfileImage $profileImage = null
     ) {  
     }
 
     public static function create(
         UserId $id,
         string $email,
-        string $password
+        string $password,
+        array $roles = [],
+        bool $isActive = false
     ): self {
-        return new self($id, $email, $password);
+        return new self($id, $email, $password, $roles);
     }
 
     public static function restore(
         UserId $id,
         string $email,
-        string $password
+        string $password,
+        array $roles = [],
+        bool $isActive = false
     ): self {
-        return new self($id, $email, $password);
+        return new self($id, $email, $password, $roles);
     }
 
     public function getId(): UserId
@@ -46,6 +52,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function setPassword(string $password):void 
+    {
+        $this->password = $password;
     }
 
     public function getRoles(): array
@@ -71,5 +82,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->email;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->isActive();
     }
 }

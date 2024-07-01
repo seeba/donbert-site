@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Product\Application\Command\Sync\AddImagesToVariant;
+namespace App\Product\Application\Command\Sync\AddImagesToProduct;
 
 use App\Product\Application\Command\Sync\AddImagesToProduct\AddImagesToProductCommand;
 use App\Product\Domain\Model\Image;
@@ -56,7 +56,7 @@ class AddImagesToProductCommandHandler implements CommandHandlerInterface
     
         }
     
-        $this->variantRepository->save($variant);
+        $this->productRepository->save($product);
     }
 }
 

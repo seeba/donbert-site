@@ -23,7 +23,9 @@ class UserTransformer
             $userEntity = new UserEntity(
                 $user->getId()->toString(),
                 $user->getEmail(),
-                $user->getPassword()
+                $user->getPassword(),
+                $user->getRoles(),
+                $user->isActive()
             );
         }
 
@@ -36,7 +38,8 @@ class UserTransformer
             new UserId($userEntity->getId()),
             $userEntity->getEmail(), 
             $userEntity->getPassword(),
-            $userEntity->getRoles()
+            $userEntity->getRoles(),
+            $userEntity->isActive()
         );
 
         return $user;
