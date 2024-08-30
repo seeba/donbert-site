@@ -6,6 +6,7 @@ namespace App\Product\Infrastructure\UI\Web\Controller\Admin;
 
 use App\Product\Application\Command\Sync\CreateAttribute\CreateAttributeCommand;
 use App\Product\Application\Command\Sync\CreateAttribute\DTO\CreateAttributeDTO;
+use App\Product\Domain\Model\Product;
 use App\Product\Domain\ValueObject\AttributeType;
 use App\Product\Infrastructure\Query\GetAttributesQuery;
 use App\Product\Infrastructure\UI\Web\Form\AttributeType as FormAttributeType;

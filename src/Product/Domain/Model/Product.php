@@ -6,8 +6,6 @@ namespace App\Product\Domain\Model;
 
 use App\Product\Domain\Model\Attribute\Attribute;
 use App\Shared\Domain\Aggregate\AggregateRoot;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 
 final class Product extends AggregateRoot
 {

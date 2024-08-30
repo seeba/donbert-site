@@ -38,6 +38,7 @@ class CategoryController extends AbstractController
     {
         $categoryDTO = new CategoryDTO();
         
+        
         $form = $this->createForm(CategoryType::class, $categoryDTO);
         $form->handleRequest($request);
         
